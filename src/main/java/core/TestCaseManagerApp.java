@@ -1,5 +1,7 @@
 package core;
 
+import components.OptiButton;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,17 +28,22 @@ public class TestCaseManagerApp {
         JPanel leftPanel = new JPanel(new GridBagLayout());
 
         // Creating new buttons
-        JButton addTestCaseButton = new JButton("Add new Test Case");
-        JButton viewTestCasesButton = new JButton("See all Test Cases");
-        JButton exitButton = new JButton("Exit");
+//        JButton addTestCaseButton = new JButton("Add new Test Case");
+//        JButton viewTestCasesButton = new JButton("See all Test Cases");
+//        JButton exitButton = new JButton("Exit");
+        OptiButton addTestCaseButton = new OptiButton("Add new Test Case");
+        OptiButton viewTestCasesButton = new OptiButton("See all Test Cases");
+        OptiButton exitButton = new OptiButton("Exit");
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
+        gbc.insets = new Insets(10, 20, 10, 20);
 
         // Add buttons to left panel
         leftPanel.add(addTestCaseButton, gbc);
+        leftPanel.add(Box.createVerticalStrut(150));
         leftPanel.add(viewTestCasesButton, gbc);
         leftPanel.add(exitButton, gbc);
 
