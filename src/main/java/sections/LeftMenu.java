@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class LeftMenu extends JPanel {
 
-    public LeftMenu() {
+    public LeftMenu(Dashboard dashboard) {
 
         // The left menu width should be at leat 1/6 of width of the screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -44,7 +44,18 @@ public class LeftMenu extends JPanel {
         // Add action listeners to the buttons
 
 
-        createNewTestCaseButton.addActionListener(e -> System.out.println("Create New Test Case"));
+        createNewTestCaseButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Create New Test Case");
+                        dashboard.removeAll();
+                        dashboard.add(new CreateNewTestCaseMenu());
+                        dashboard.revalidate();
+                        dashboard.repaint();
+                    }
+                }
+        );
         showAllTestCasesButton.addActionListener(e -> System.out.println("Show All Test Cases"));
         ConfigureButton.addActionListener(e -> System.out.println("Configure"));
 
