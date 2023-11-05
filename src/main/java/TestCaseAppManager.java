@@ -10,7 +10,6 @@ public class TestCaseAppManager extends JFrame {
 
     public TestCaseAppManager() {
 
-        // COMPONENTS
         // Create components
         Dashboard dashboard = new Dashboard();
         LeftMenu leftMenu = new LeftMenu(dashboard);
