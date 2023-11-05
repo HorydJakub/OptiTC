@@ -1,3 +1,4 @@
+import core.ConstantValues;
 import sections.Dashboard;
 import sections.FooterMenu;
 import sections.LeftMenu;
@@ -9,37 +10,33 @@ public class TestCaseAppManager extends JFrame {
 
     public TestCaseAppManager() {
 
-        // COMPONENTS
         // Create components
-        LeftMenu leftMenu = new LeftMenu();
         Dashboard dashboard = new Dashboard();
+        LeftMenu leftMenu = new LeftMenu(dashboard);
         FooterMenu footerMenu = new FooterMenu();
 
-
-        // Get the screen size
-        int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-        int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-
         // Set the size and location of the frame
-        setSize(screenWidth / 2, screenHeight / 2);
-        setLocation(screenWidth / 4, screenHeight / 4);
+        setSize(ConstantValues.SCREEN_WIDTH, ConstantValues.SCREEN_HEIGHT);
 
         // Set the title of the frame
-        setTitle("JFrame");
-
-        // Set the icon of the frame
-        setVisible(true);
+        setTitle(ConstantValues.APP_NAME + " " + ConstantValues.APP_VERSION);
 
         // Set the default close operation
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // LAYOUT MANAGER
+        // Setup logo icon
+        ImageIcon logoIcon = new ImageIcon("src/main/resources/logo.png");
+        setIconImage(logoIcon.getImage());
+
         // Set the layout of the frame
         setLayout(new BorderLayout());
 
         // Add components to the frame
         add(leftMenu, BorderLayout.WEST);
-        add(dashboard, BorderLayout.CENTER);
         add(footerMenu, BorderLayout.SOUTH);
+        add(dashboard, BorderLayout.CENTER);
+
+        // Set the frame to be visible
+        setVisible(true);
     }
 }

@@ -14,5 +14,6 @@ public class OptiButton extends JButton {
         setContentAreaFilled(false);
         setOpaque(true);
         setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE));
+        setFont(new Font("Console", Font.BOLD, 14));
     }
 }
