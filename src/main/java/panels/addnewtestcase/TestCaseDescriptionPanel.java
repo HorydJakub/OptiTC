@@ -8,11 +8,19 @@ import java.awt.*;
 public class TestCaseDescriptionPanel extends JPanel {
 
     private JLabel testCaseDescriptionLabel;
-    private OptiTextField testCaseDescriptionTextField;
+    private static OptiTextField testCaseDescriptionTextField;
     public TestCaseDescriptionPanel(String testCaseDescriptionLabelText, String testCaseDescriptionTextFieldText) {
         this.testCaseDescriptionLabel = new JLabel(testCaseDescriptionLabelText);
-        this.testCaseDescriptionTextField = new OptiTextField(testCaseDescriptionTextFieldText, 500, 30);
+        testCaseDescriptionTextField = new OptiTextField(testCaseDescriptionTextFieldText, 500, 30);
         add(testCaseDescriptionLabel);
         add(testCaseDescriptionTextField);
+    }
+
+    public static String getTestCaseDescriptionTextField() {
+        return testCaseDescriptionTextField.getText();
+    }
+
+    public static void setTestCaseDescriptionTextField(String testCaseDescriptionTextFieldText) {
+        testCaseDescriptionTextField.setText(testCaseDescriptionTextFieldText);
     }
 }

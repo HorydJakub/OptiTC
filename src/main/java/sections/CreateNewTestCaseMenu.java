@@ -1,17 +1,20 @@
 package sections;
 
 import components.*;
+import components.addnewtestcase.AddNewStepButton;
 import panels.addnewtestcase.TestCaseDescriptionPanel;
 import panels.addnewtestcase.TestCaseExpectedResultsPanel;
 import panels.addnewtestcase.*;
 
 import javax.swing.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class CreateNewTestCaseMenu extends JPanel {
 
-    private JPanel stepsContainerPanel;
-    private int currentStepCount = 1;
-    private final int maximumNumberOfSteps = 10;
+    private static JPanel stepsContainerPanel;
+    private static int currentStepCount = 1;
+    private AddStepPanel addStepPanel;
     public CreateNewTestCaseMenu() {
 
         // Set layout for the panel
@@ -21,10 +24,10 @@ public class CreateNewTestCaseMenu extends JPanel {
         HeaderPanel headerPanel = new HeaderPanel("Create New Test Case");
 
         // Create Test Case Title Panel
-        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", "Enter Test Case Title");
+        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", "Please fill out this field!");
 
         // Create Test Case Description Panel
-        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", "Enter Test Case Description");
+        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", "Please fill out this field!");
 
         // Create Test Case Priority Panel
         TestCasePriorityPanel priorityPanel = new TestCasePriorityPanel();
@@ -33,7 +36,7 @@ public class CreateNewTestCaseMenu extends JPanel {
         TestCaseTypePanel typePanel = new TestCaseTypePanel();
 
         // Create Add Step Panel
-        AddStepPanel addStepPanel = new AddStepPanel(currentStepCount);
+        addStepPanel = new AddStepPanel(currentStepCount);
 
         // Create container panel for AddStepPanel and Add New Step Button
         stepsContainerPanel = new JPanel();
@@ -41,10 +44,10 @@ public class CreateNewTestCaseMenu extends JPanel {
         stepsContainerPanel.add(addStepPanel);
 
         // Create new step button
-        JButton addNewStepButton = getjButton();
+        AddNewStepButton addNewStepButton = new AddNewStepButton(stepsContainerPanel);
 
         // Create Test Case Expected Result Panel
-        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", "Enter Expected Result");
+        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", "Please fill out this field!");
 
         // Create Finish Creating Test Case Panel
         FinishCreatingTestCasePanel finishCreatingTestCasePanel = new FinishCreatingTestCasePanel();
@@ -61,24 +64,11 @@ public class CreateNewTestCaseMenu extends JPanel {
         add(finishCreatingTestCasePanel);
     }
 
-    private JButton getjButton() {
-        JButton addNewStepButton = new JButton("Add New Step");
-
-        // put button to the center
-        addNewStepButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
-
-        // Add new step button action listener
-        addNewStepButton.addActionListener(e -> {
-            if (currentStepCount < maximumNumberOfSteps) {
-                AddStepPanel newAddStepPanel = new AddStepPanel(currentStepCount+1);
-                stepsContainerPanel.add(newAddStepPanel);
-                currentStepCount++;
-                revalidate();
-                repaint();
-            } else {
-                JOptionPane.showMessageDialog(this, "Maximum number of steps reached.", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
-        });
-        return addNewStepButton;
+    public static List<OptiTextField> getStepsTextFieldFromStepsContainerPanel() {
+        return Arrays.stream(stepsContainerPanel.getComponents())
+                .filter(component -> component instanceof AddStepPanel)
+                .map(component -> (AddStepPanel) component)
+                .map(AddStepPanel::getStepTextField)
+                .toList();
     }
 }
