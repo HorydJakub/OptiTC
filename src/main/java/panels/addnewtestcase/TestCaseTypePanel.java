@@ -1,6 +1,5 @@
 package panels.addnewtestcase;
 
-import enumerates.Priorities;
 import enumerates.Types;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import java.util.Arrays;
 public class TestCaseTypePanel extends JPanel {
 
     private JLabel typeLabel;
-    private JComboBox typeComboBox;
+    private static JComboBox typeComboBox;
 
     public TestCaseTypePanel() {
 
@@ -26,5 +25,13 @@ public class TestCaseTypePanel extends JPanel {
         // Add components to the panel
         add(typeLabel);
         add(typeComboBox);
+    }
+
+    public static String getTypeComboBox() {
+        return typeComboBox.getSelectedItem().toString();
+    }
+
+    public static void setTypeComboBox(String type) {
+        typeComboBox.setSelectedItem(type);
     }
 }

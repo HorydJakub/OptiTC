@@ -19,4 +19,8 @@ public class TestCaseTitlePanel extends JPanel {
     public static String getTestCaseTitleTextField() {
         return testCaseTitleTextField.getText();
     }
+
+    public static void setTestCaseTitleTextField(String testCaseTitleTextFieldText) {
+        testCaseTitleTextField.setText(testCaseTitleTextFieldText);
+    }
 }

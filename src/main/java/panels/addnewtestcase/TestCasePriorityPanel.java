@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class TestCasePriorityPanel extends JPanel {
 
     private JLabel priorityLabel;
-    private JComboBox priorityComboBox;
+    private static JComboBox priorityComboBox;
 
     public TestCasePriorityPanel() {
 
@@ -25,5 +25,13 @@ public class TestCasePriorityPanel extends JPanel {
         // Add components to the panel
         add(priorityLabel);
         add(priorityComboBox);
+    }
+
+    public static String getPriorityComboBox() {
+        return priorityComboBox.getSelectedItem().toString();
+    }
+
+    public static void setPriorityComboBox(String priority) {
+        priorityComboBox.setSelectedItem(priority);
     }
 }
