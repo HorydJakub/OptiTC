@@ -17,9 +17,8 @@ public class SaveTestCaseButton extends JButton {
 
     private final HashMap<String, String> testCaseDetails = new HashMap<>();
 
-    public SaveTestCaseButton(String saveTestCaseButtonText) {
-        super(saveTestCaseButtonText);
-
+    public SaveTestCaseButton() {
+        super("Save Test Case");
         addActionListener(e -> {
             fillTestCaseDetails();
             List<String> listOfNotFieldWithDefaultValues = getNotFilledFieldsList();

@@ -8,12 +8,16 @@ import java.awt.*;
 
 public class TestCaseAppManager extends JFrame {
 
+    private Dashboard dashboard;
+    private LeftMenu leftMenu;
+    private FooterMenu footerMenu;
+
     public TestCaseAppManager() {
 
         // Create components
-        Dashboard dashboard = new Dashboard();
-        LeftMenu leftMenu = new LeftMenu(dashboard);
-        FooterMenu footerMenu = new FooterMenu();
+        dashboard = new Dashboard();
+        leftMenu = new LeftMenu(dashboard);
+        footerMenu = new FooterMenu();
 
         // Set the size and location of the frame
         setSize(ConstantValues.SCREEN_WIDTH, ConstantValues.SCREEN_HEIGHT);
@@ -35,5 +39,17 @@ public class TestCaseAppManager extends JFrame {
         add(leftMenu, BorderLayout.WEST);
         add(dashboard, BorderLayout.CENTER);
         add(footerMenu, BorderLayout.SOUTH);
+    }
+
+    public JPanel getDashboard() {
+        return dashboard;
+    }
+
+    public LeftMenu getLeftMenu() {
+        return leftMenu;
+    }
+
+    public FooterMenu getFooterMenu() {
+        return footerMenu;
     }
 }
