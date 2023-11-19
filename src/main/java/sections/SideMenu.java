@@ -1,17 +1,18 @@
 package sections;
 
 import components.ExitConfirmationPopup;
-import components.OptiButton;
+import components.OptiSideMenuButton;
 import core.ConstantValues;
+import core.TestCaseAppManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LeftMenu extends JPanel {
+public class SideMenu extends JPanel {
 
-    public LeftMenu(Dashboard dashboard) {
+    public SideMenu() {
 
         // The left menu width should be at leat 1/6 of width of the screen
         setPreferredSize(new Dimension(ConstantValues.SCREEN_WIDTH/6, ConstantValues.SCREEN_HEIGHT));
@@ -24,13 +25,14 @@ public class LeftMenu extends JPanel {
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.LIGHT_GRAY));
 
         // List of buttons
-        OptiButton createNewTestCaseButton = new OptiButton("Create New Test Case");
-        OptiButton manageTestCasesButton = new OptiButton("Manage Test Cases");
-        OptiButton createNewRunButton = new OptiButton("Create New Run");
-        OptiButton manageRunsButton = new OptiButton("Manage Runs");
-        OptiButton exitButton = new OptiButton("Exit");
+        OptiSideMenuButton createNewTestCaseButton = new OptiSideMenuButton("Create New Test Case");
+        OptiSideMenuButton manageTestCasesButton = new OptiSideMenuButton("Manage Test Cases");
+        OptiSideMenuButton createNewRunButton = new OptiSideMenuButton("Create New Run");
+        OptiSideMenuButton manageRunsButton = new OptiSideMenuButton("Manage Runs");
+        OptiSideMenuButton exitButton = new OptiSideMenuButton("Exit");
 
         // Add components to the panel
         add(title);
@@ -41,18 +43,12 @@ public class LeftMenu extends JPanel {
         add(exitButton);
 
         // Add action listeners to the buttons
-        createNewTestCaseButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("Create New Test Case");
-                        dashboard.removeAll();
-                        dashboard.add(new CreateNewTestCaseMenu());
-                        dashboard.revalidate();
-                        dashboard.repaint();
-                    }
-                }
-        );
+        createNewTestCaseButton.addActionListener(e -> {
+            TestCaseAppManager.getDashboard().removeAll();
+            TestCaseAppManager.getDashboard().add(new CreateNewTestCaseMenu());
+            TestCaseAppManager.getDashboard().revalidate();
+            TestCaseAppManager.getDashboard().repaint();
+        });
 
         exitButton.addActionListener(
                 exitConfirmationPopup -> new ExitConfirmationPopup()
