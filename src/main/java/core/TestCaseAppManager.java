@@ -1,9 +1,8 @@
 package core;
 
-import core.ConstantValues;
 import sections.Dashboard;
 import sections.FooterMenu;
-import sections.LeftMenu;
+import sections.SideMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,14 +10,14 @@ import java.awt.*;
 public class TestCaseAppManager extends JFrame {
 
     private static Dashboard dashboard;
-    private static LeftMenu leftMenu;
+    private static SideMenu leftMenu;
     private static FooterMenu footerMenu;
 
     public TestCaseAppManager() {
 
         // Create components
         dashboard = new Dashboard();
-        leftMenu = new LeftMenu(dashboard);
+        leftMenu = new SideMenu();
         footerMenu = new FooterMenu();
 
         // Set the size and location of the frame
@@ -47,7 +46,7 @@ public class TestCaseAppManager extends JFrame {
         return dashboard;
     }
 
-    public static LeftMenu getLeftMenu() {
+    public static SideMenu getLeftMenu() {
         return leftMenu;
     }
 
