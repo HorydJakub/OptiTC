@@ -1,3 +1,5 @@
+package core;
+
 import core.ConstantValues;
 import sections.Dashboard;
 import sections.FooterMenu;
@@ -8,9 +10,9 @@ import java.awt.*;
 
 public class TestCaseAppManager extends JFrame {
 
-    private Dashboard dashboard;
-    private LeftMenu leftMenu;
-    private FooterMenu footerMenu;
+    private static Dashboard dashboard;
+    private static LeftMenu leftMenu;
+    private static FooterMenu footerMenu;
 
     public TestCaseAppManager() {
 
@@ -41,15 +43,15 @@ public class TestCaseAppManager extends JFrame {
         add(footerMenu, BorderLayout.SOUTH);
     }
 
-    public JPanel getDashboard() {
+    public static Dashboard getDashboard() {
         return dashboard;
     }
 
-    public LeftMenu getLeftMenu() {
+    public static LeftMenu getLeftMenu() {
         return leftMenu;
     }
 
-    public FooterMenu getFooterMenu() {
+    public static FooterMenu getFooterMenu() {
         return footerMenu;
     }
 }
