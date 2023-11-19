@@ -55,7 +55,7 @@ public class LeftMenu extends JPanel {
         );
 
         exitButton.addActionListener(
-                ExitConfirmationPopup -> new ExitConfirmationPopup()
+                exitConfirmationPopup -> new ExitConfirmationPopup()
         );
     }
 }

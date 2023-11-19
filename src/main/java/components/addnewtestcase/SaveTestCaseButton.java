@@ -2,8 +2,10 @@ package components.addnewtestcase;
 
 import components.OptiTextField;
 import core.PropertiesHandler;
+import core.TestCaseAppManager;
 import panels.addnewtestcase.*;
 import sections.CreateNewTestCaseMenu;
+import sections.TestCaseAddedMenu;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -17,9 +19,8 @@ public class SaveTestCaseButton extends JButton {
 
     private final HashMap<String, String> testCaseDetails = new HashMap<>();
 
-    public SaveTestCaseButton(String saveTestCaseButtonText) {
-        super(saveTestCaseButtonText);
-
+    public SaveTestCaseButton() {
+        super("Save Test Case");
         addActionListener(e -> {
             fillTestCaseDetails();
             List<String> listOfNotFieldWithDefaultValues = getNotFilledFieldsList();
@@ -27,11 +28,19 @@ public class SaveTestCaseButton extends JButton {
                 int confirmationDialogResult = showConfirmationDialog();
                 if (confirmationDialogResult == JOptionPane.YES_OPTION) {
                     uploadTestCaseToDataBase();
+                    showConfirmationMenu();
                 }
             } else {
                 showErrorMessage(listOfNotFieldWithDefaultValues);
             }
         });
+    }
+
+    private void showConfirmationMenu() {
+        TestCaseAppManager.getDashboard().removeAll();
+        TestCaseAppManager.getDashboard().add(new TestCaseAddedMenu());
+        TestCaseAppManager.getDashboard().revalidate();
+        TestCaseAppManager.getDashboard().repaint();
     }
 
     private void fillTestCaseDetails() {

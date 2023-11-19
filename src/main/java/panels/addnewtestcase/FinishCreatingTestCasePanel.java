@@ -1,6 +1,6 @@
 package panels.addnewtestcase;
 
-import components.addnewtestcase.ResetFieldsTestCaseButton;
+import components.addnewtestcase.ResetFieldsButton;
 import components.addnewtestcase.SaveTestCaseButton;
 
 import javax.swing.*;
@@ -8,22 +8,17 @@ import javax.swing.*;
 public class FinishCreatingTestCasePanel extends JPanel {
 
     private JButton saveTestCaseButton;
-    private ResetFieldsTestCaseButton clearFieldsButton;
-    private JButton cancelButton;
+    private JButton resetFieldsButton;
     public FinishCreatingTestCasePanel() {
 
         // Create Save Test Case Button
-        saveTestCaseButton = new SaveTestCaseButton("Save Test Case");
-
-        // Create Clear Fields Button
-        clearFieldsButton = new ResetFieldsTestCaseButton("Clear Fields");
+        saveTestCaseButton = new SaveTestCaseButton();
 
         // Create Cancel Button
-        cancelButton = new JButton("Cancel");
+        resetFieldsButton = new ResetFieldsButton();
 
         // Add components to the panel
         add(saveTestCaseButton);
-        add(clearFieldsButton);
-        add(cancelButton);
+        add(resetFieldsButton);
     }
 }
