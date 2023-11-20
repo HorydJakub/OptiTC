@@ -2,6 +2,7 @@ package components.addnewtestcase;
 
 import components.OptiTextField;
 import core.PropertiesHandler;
+import core.SqlBuilder;
 import core.TestCaseAppManager;
 import panels.addnewtestcase.*;
 import sections.CreateNewTestCaseMenu;
@@ -77,42 +78,7 @@ public class SaveTestCaseButton extends JButton {
                 .toList();
         String testCaseExpectedResultsValue = TestCaseExpectedResultsPanel.getTestCaseExpectedResultsTextField();
 
-        try {
-            PropertiesHandler propertiesHandler = new PropertiesHandler();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(
-                    propertiesHandler.getSqlUrl(), propertiesHandler.getSqlUser(), propertiesHandler.getSqlPassword()
-            );
-            Statement statement = connection.createStatement();
-
-            StringBuilder stepsConcatenated = new StringBuilder();
-            for (String step : stepsTextFieldFromStepsContainerPanelValues) {
-                stepsConcatenated.append(step).append("\n"); // Separating steps by newline
-            }
-
-            // Constructing the SQL INSERT statement
-            String insertQuery = "INSERT INTO test_cases " +
-                    "(testcase_name, testcase_description, testcase_priority, testcase_type, step, testcase_expected_results) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
-
-            // Creating prepared statement for SQL injection prevention and better performance
-            java.sql.PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
-            preparedStatement.setString(1, testCaseTitleValue);
-            preparedStatement.setString(2, testCaseDescriptionValue);
-            preparedStatement.setString(3, testCasePriorityValue);
-            preparedStatement.setString(4, testCaseTypeValue);
-            preparedStatement.setString(5, stepsConcatenated.toString()); // Inserting steps as concatenated string
-            preparedStatement.setString(6, testCaseExpectedResultsValue);
-
-            // Executing the insert query
-            preparedStatement.executeUpdate();
-
-            // Closing resources
-            preparedStatement.close();
-            connection.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        SqlBuilder.sendNewTestCaseToDatabase(testCaseTitleValue, testCaseDescriptionValue, testCasePriorityValue, testCaseTypeValue, stepsTextFieldFromStepsContainerPanelValues, testCaseExpectedResultsValue);
     }
 
     private void showErrorMessage(List<String> listOfNotFieldWithDefaultValues) {
