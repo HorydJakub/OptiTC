@@ -7,14 +7,10 @@ import panels.addnewtestcase.TestCaseExpectedResultsPanel;
 import panels.addnewtestcase.*;
 
 import javax.swing.*;
-import java.util.Arrays;
-import java.util.List;
 
 public class CreateNewTestCaseMenu extends JPanel {
 
-    private static JPanel stepsContainerPanel;
-    private static int currentStepCount = 1;
-    private AddStepPanel addStepPanel;
+    private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel();
     public CreateNewTestCaseMenu() {
 
         // Set layout for the panel
@@ -35,13 +31,8 @@ public class CreateNewTestCaseMenu extends JPanel {
         // Create Test Case Type Panel
         TestCaseTypePanel typePanel = new TestCaseTypePanel();
 
-        // Create Add Step Panel
-        addStepPanel = new AddStepPanel(currentStepCount);
-
         // Create container panel for AddStepPanel and Add New Step Button
-        stepsContainerPanel = new JPanel();
-        stepsContainerPanel.setLayout(new BoxLayout(stepsContainerPanel, BoxLayout.Y_AXIS));
-        stepsContainerPanel.add(addStepPanel);
+        stepsContainerPanel = new StepsContainerPanel();
 
         // Create new step button
         AddNewStepButton addNewStepButton = new AddNewStepButton(stepsContainerPanel);
@@ -64,11 +55,7 @@ public class CreateNewTestCaseMenu extends JPanel {
         add(finishCreatingTestCasePanel);
     }
 
-    public static List<OptiTextField> getStepsTextFieldFromStepsContainerPanel() {
-        return Arrays.stream(stepsContainerPanel.getComponents())
-                .filter(component -> component instanceof AddStepPanel)
-                .map(component -> (AddStepPanel) component)
-                .map(AddStepPanel::getStepTextField)
-                .toList();
+    public static StepsContainerPanel getStepsContainerPanel() {
+        return stepsContainerPanel;
     }
 }
