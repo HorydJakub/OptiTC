@@ -27,17 +27,17 @@ public class RemoveSingleStepButton extends JButton {
 
     private void removeStepById() {
 
-        // Get the parent panel
-        JPanel parentPanel = (JPanel) getParent();
+        // Get the add step panel
+        JPanel addStepPanel = (JPanel) getParent();
 
-        // Get the parent panel's parent panel
-        JPanel parentParentPanel = (JPanel) parentPanel.getParent();
+        // Get the steps container panel
+        JPanel stepsContainerPanel = CreateNewTestCaseMenu.getStepsContainerPanel();
 
-        // Remove the parent panel from the parent parent panel
-        parentParentPanel.remove(parentPanel);
+        // Remove the add step panel from the steps container panel
+        stepsContainerPanel.remove(addStepPanel);
 
-        // Repaint the parent parent panel
-        parentParentPanel.repaint();
+        // Repaint the steps container panel
+        stepsContainerPanel.repaint();
 
         // Reset the steps count
         AddNewStepButton.resetStepsCount();

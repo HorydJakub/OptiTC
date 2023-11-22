@@ -9,16 +9,11 @@ import java.awt.*;
 
 public class TestCaseAppManager extends JFrame {
 
-    private static Dashboard dashboard;
-    private static SideMenu leftMenu;
-    private static FooterMenu footerMenu;
+    private static final Dashboard dashboard = new Dashboard();
+    private static final SideMenu leftMenu = new SideMenu();
+    private static final FooterMenu footerMenu = new FooterMenu();
 
     public TestCaseAppManager() {
-
-        // Create components
-        dashboard = new Dashboard();
-        leftMenu = new SideMenu();
-        footerMenu = new FooterMenu();
 
         // Set the size and location of the frame
         setSize(ConstantValues.SCREEN_WIDTH, ConstantValues.SCREEN_HEIGHT);

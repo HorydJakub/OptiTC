@@ -38,7 +38,7 @@ public class ResetFieldsButton extends JButton {
         TestCaseTypePanel.setTypeComboBox(ConstantValues.DEFAULT_VALUE_FOR_TYPE_COMBO_BOX);
 
         // Reset Add Step Panel
-        CreateNewTestCaseMenu.getStepsTextFieldFromStepsContainerPanel().forEach(stepTextField ->
+        CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().forEach(stepTextField ->
                 stepTextField.setText(ConstantValues.DEFAULT_VALUE_FOR_EMPTY_FIELD)
         );
 

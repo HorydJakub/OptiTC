@@ -50,8 +50,8 @@ public class SaveTestCaseButton extends JButton {
         testCaseDetails.put("Priority", TestCasePriorityPanel.getPriorityComboBox());
         testCaseDetails.put("Type", TestCaseTypePanel.getTypeComboBox());
         testCaseDetails.put("Expected Results", TestCaseExpectedResultsPanel.getTestCaseExpectedResultsTextField());
-        CreateNewTestCaseMenu.getStepsTextFieldFromStepsContainerPanel().forEach(stepTextField -> {
-            testCaseDetails.put("Step " + (CreateNewTestCaseMenu.getStepsTextFieldFromStepsContainerPanel().indexOf(stepTextField) + 1), stepTextField.getText());
+        CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().forEach(stepTextField -> {
+            testCaseDetails.put("Step " + (CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().indexOf(stepTextField) + 1), stepTextField.getText());
         });
 
     }
@@ -72,7 +72,7 @@ public class SaveTestCaseButton extends JButton {
         String testCaseDescriptionValue = TestCaseDescriptionPanel.getTestCaseDescriptionTextField();
         String testCasePriorityValue = TestCasePriorityPanel.getPriorityComboBox();
         String testCaseTypeValue = TestCaseTypePanel.getTypeComboBox();
-        List<OptiTextField> stepsTextFieldFromStepsContainerPanel = CreateNewTestCaseMenu.getStepsTextFieldFromStepsContainerPanel();
+        List<OptiTextField> stepsTextFieldFromStepsContainerPanel = CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel();
         List<String> stepsTextFieldFromStepsContainerPanelValues = stepsTextFieldFromStepsContainerPanel.stream()
                 .map(OptiTextField::getText)
                 .toList();
