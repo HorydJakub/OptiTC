@@ -42,6 +42,7 @@ public class SaveTestCaseButton extends JButton {
         TestCaseAppManager.getDashboard().add(new TestCaseAddedMenu());
         TestCaseAppManager.getDashboard().revalidate();
         TestCaseAppManager.getDashboard().repaint();
+        AddNewStepButton.resetStepsCount();
     }
 
     private void fillTestCaseDetails() {

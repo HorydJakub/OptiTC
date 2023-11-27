@@ -3,12 +3,14 @@ package sections;
 import components.ExitConfirmationPopup;
 import components.OptiSideMenuButton;
 import core.ConstantValues;
+import core.SqlBuilder;
 import core.TestCaseAppManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class SideMenu extends JPanel {
 
@@ -43,9 +45,19 @@ public class SideMenu extends JPanel {
         add(exitButton);
 
         // Add action listeners to the buttons
+
+        // Create New Test Case Button
         createNewTestCaseButton.addActionListener(e -> {
             TestCaseAppManager.getDashboard().removeAll();
             TestCaseAppManager.getDashboard().add(new CreateNewTestCaseMenu());
+            TestCaseAppManager.getDashboard().revalidate();
+            TestCaseAppManager.getDashboard().repaint();
+        });
+
+        // Manage Test Cases Button
+        manageTestCasesButton.addActionListener(e -> {
+            TestCaseAppManager.getDashboard().removeAll();
+            TestCaseAppManager.getDashboard().add(new ManageTestCasesMenu());
             TestCaseAppManager.getDashboard().revalidate();
             TestCaseAppManager.getDashboard().repaint();
         });

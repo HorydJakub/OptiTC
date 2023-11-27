@@ -10,4 +10,8 @@ public class Dashboard extends JPanel {
         welcomeLabel.setBackground(java.awt.Color.RED);
         add(welcomeLabel);
     }
+
+    public Integer getWidthOfDashboard() {
+        return this.getWidth();
+    }
 }
