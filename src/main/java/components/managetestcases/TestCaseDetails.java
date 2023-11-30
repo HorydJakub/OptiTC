@@ -37,7 +37,7 @@ public class TestCaseDetails extends JPanel {
         int sizeOfSteps = testCase.getTestCaseStepsValuesAsList().size();
 
         // Create container panel for AddStepPanel
-        StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(false);
+        StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(false, false);
 
         // Create AddStepPanel for each step
         for (int i = 0; i < sizeOfSteps; i++) {
