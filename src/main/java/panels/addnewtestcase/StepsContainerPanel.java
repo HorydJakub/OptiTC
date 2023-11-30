@@ -8,16 +8,18 @@ import java.util.List;
 
 public class StepsContainerPanel extends JPanel {
 
-    public StepsContainerPanel() {
+    public StepsContainerPanel(boolean areFieldsEditable) {
 
         // Set layout for the panel
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        // Add the first step
-        AddStepPanel addStepPanel = new AddStepPanel(1);
+        // Add the first step only if the fields are editable
+        AddStepPanel addStepPanel = new AddStepPanel(1, areFieldsEditable);
 
-        // Add the first step to the panel
-        add(addStepPanel);
+        // Add the first step to the panel only if the fields are editable
+        if (areFieldsEditable) {
+            add(addStepPanel);
+        }
     }
 
     public List<OptiTextField> getStepsTextFieldFromStepsContainerPanel() {

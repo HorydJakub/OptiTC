@@ -10,7 +10,7 @@ public class TestCaseTypePanel extends JPanel {
     private JLabel typeLabel;
     private static JComboBox typeComboBox;
 
-    public TestCaseTypePanel() {
+    public TestCaseTypePanel(boolean isEditable, Types defaultType) {
 
         // Create Type Label
         typeLabel = new JLabel("Type:");
@@ -20,7 +20,10 @@ public class TestCaseTypePanel extends JPanel {
         Arrays.stream(Types.values()).toList().forEach(typeComboBox::addItem);
 
         // Select default value
-        typeComboBox.setSelectedItem(Types.FUNCTIONAL);
+        typeComboBox.setSelectedItem(defaultType);
+
+        // Set editable
+        typeComboBox.setEnabled(isEditable);
 
         // Add components to the panel
         add(typeLabel);
