@@ -262,4 +262,18 @@ public abstract class SqlBuilder {
                 }
                 return testCaseExpectedResult;
         }
+
+    public static void deleteTestCaseById(int testCaseId) {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM test_cases WHERE testcase_id = ?");
+            preparedStatement.setInt(1, testCaseId);
+            preparedStatement.executeUpdate();
+            closeResources(preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
 }

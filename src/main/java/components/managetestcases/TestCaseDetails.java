@@ -3,13 +3,16 @@ package components.managetestcases;
 import components.HeaderPanel;
 import components.TestCase;
 import panels.addnewtestcase.*;
+import panels.testcasedetails.TestCaseDetailsButtonsPanel;
 
 import javax.swing.*;
 
 public class TestCaseDetails extends JPanel {
 
     private TestCase testCase;
+    private int testCaseId;
     public TestCaseDetails(int testCaseId) {
+        this.testCaseId = testCaseId;
         this.testCase = new TestCase(testCaseId);
 
         // Set layout for the panel
@@ -50,6 +53,8 @@ public class TestCaseDetails extends JPanel {
         revalidate();
         repaint();
 
+        // Create Test Case Details Buttons Panel
+        TestCaseDetailsButtonsPanel testCaseDetailsButtonsPanel = new TestCaseDetailsButtonsPanel(testCaseId);
 
         // Add components to the main panel
         add(headerPanel);
@@ -59,7 +64,10 @@ public class TestCaseDetails extends JPanel {
         add(typePanel);
         add(stepsContainerPanel);
         add(expectedResultsPanel);
+        add(testCaseDetailsButtonsPanel);
     }
 
-
+    public int getTestCaseId() {
+        return testCaseId;
+    }
 }
