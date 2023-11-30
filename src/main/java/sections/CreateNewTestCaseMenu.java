@@ -2,6 +2,8 @@ package sections;
 
 import components.*;
 import components.addnewtestcase.AddNewStepButton;
+import enumerates.Priorities;
+import enumerates.Types;
 import panels.addnewtestcase.TestCaseDescriptionPanel;
 import panels.addnewtestcase.TestCaseExpectedResultsPanel;
 import panels.addnewtestcase.*;
@@ -10,7 +12,7 @@ import javax.swing.*;
 
 public class CreateNewTestCaseMenu extends JPanel {
 
-    private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel();
+    private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true);
     public CreateNewTestCaseMenu() {
 
         // Set layout for the panel
@@ -20,25 +22,25 @@ public class CreateNewTestCaseMenu extends JPanel {
         HeaderPanel headerPanel = new HeaderPanel("Create New Test Case");
 
         // Create Test Case Title Panel
-        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", "Please fill out this field!");
+        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", "Please fill out this field!", true);
 
         // Create Test Case Description Panel
-        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", "Please fill out this field!");
+        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", "Please fill out this field!", true);
 
         // Create Test Case Priority Panel
-        TestCasePriorityPanel priorityPanel = new TestCasePriorityPanel();
+        TestCasePriorityPanel priorityPanel = new TestCasePriorityPanel(true, Priorities.MEDIUM);
 
         // Create Test Case Type Panel
-        TestCaseTypePanel typePanel = new TestCaseTypePanel();
+        TestCaseTypePanel typePanel = new TestCaseTypePanel(true, Types.FUNCTIONAL);
 
         // Create container panel for AddStepPanel and Add New Step Button
-        stepsContainerPanel = new StepsContainerPanel();
+        stepsContainerPanel = new StepsContainerPanel(true);
 
         // Create new step button
         AddNewStepButton addNewStepButton = new AddNewStepButton(stepsContainerPanel);
 
         // Create Test Case Expected Result Panel
-        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", "Please fill out this field!");
+        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", "Please fill out this field!", true);
 
         // Create Finish Creating Test Case Panel
         FinishCreatingTestCasePanel finishCreatingTestCasePanel = new FinishCreatingTestCasePanel();

@@ -10,7 +10,7 @@ public class TestCasePriorityPanel extends JPanel {
     private JLabel priorityLabel;
     private static JComboBox priorityComboBox;
 
-    public TestCasePriorityPanel() {
+    public TestCasePriorityPanel(boolean isEditable, Priorities defaultPriority) {
 
         // Create Priority Label
         priorityLabel = new JLabel("Priority:");
@@ -20,7 +20,10 @@ public class TestCasePriorityPanel extends JPanel {
         Arrays.stream(Priorities.values()).toList().forEach(priorityComboBox::addItem);
 
         // Select default value
-        priorityComboBox.setSelectedItem(Priorities.MEDIUM);
+        priorityComboBox.setSelectedItem(defaultPriority);
+
+        // Set editable
+        priorityComboBox.setEnabled(isEditable);
 
         // Add components to the panel
         add(priorityLabel);

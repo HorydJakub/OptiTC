@@ -26,7 +26,7 @@ public class AddNewStepButton extends JButton {
     private void addNewStep() {
         if (currentStepCount < maximumNumberOfSteps) {
             currentStepCount++;
-            AddStepPanel newAddStepPanel = new AddStepPanel(currentStepCount);
+            AddStepPanel newAddStepPanel = new AddStepPanel(currentStepCount, true);
             stepsContainerPanel.add(newAddStepPanel);
             stepsContainerPanel.revalidate();
             stepsContainerPanel.repaint();

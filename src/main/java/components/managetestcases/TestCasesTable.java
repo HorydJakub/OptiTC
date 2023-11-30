@@ -14,7 +14,7 @@ public class TestCasesTable extends JTable {
     private int preferredWidth = TestCaseAppManager.getDashboard().getWidthOfDashboard();
 
     public TestCasesTable() {
-        super(SqlBuilder.getIdAndTitleOfTestCases(), new String[]{"ID", "Name", "Edit"});
+        super(SqlBuilder.getIdAndTitleOfTestCases(), new String[]{"ID", "Name", "Details"});
 
         setMaximumSize(new Dimension(preferredWidth, 100));
         // rows can not be edited

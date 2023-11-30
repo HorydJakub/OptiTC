@@ -129,7 +129,7 @@ public abstract class SqlBuilder {
                 while (resultSet.next()) {
                     idAndTitleOfTestCases[i][0] = resultSet.getInt("testcase_id");
                     idAndTitleOfTestCases[i][1] = resultSet.getString("testcase_name");
-                    idAndTitleOfTestCases[i][2] = "Edit";
+                    idAndTitleOfTestCases[i][2] = "Details";
                     i++;
                 }
                 closeResources(resultSet, statement, connection);
@@ -160,4 +160,106 @@ public abstract class SqlBuilder {
             }
             return testCaseData;
      }
+
+     public static String getTestCaseTitleById(int testCaseId) {
+            String testCaseTitle = "";
+            try {
+                PropertiesHandler propertiesHandler = new PropertiesHandler();
+                Connection connection = getConnection(propertiesHandler);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT testcase_name FROM test_cases WHERE testcase_id = " + testCaseId);
+                while (resultSet.next()) {
+                    testCaseTitle = resultSet.getString("testcase_name");
+                }
+                closeResources(resultSet, statement, connection);
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+            return testCaseTitle;
+     }
+
+     public static String getTestCaseDescriptionById(int testCaseId) {
+            String testCaseDescription = "";
+            try {
+                PropertiesHandler propertiesHandler = new PropertiesHandler();
+                Connection connection = getConnection(propertiesHandler);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT testcase_description FROM test_cases WHERE testcase_id = " + testCaseId);
+                while (resultSet.next()) {
+                    testCaseDescription = resultSet.getString("testcase_description");
+                }
+                closeResources(resultSet, statement, connection);
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+            }
+            return testCaseDescription;
+     }
+
+        public static String getTestCasePriorityById(int testCaseId) {
+                String testCasePriority = "";
+                try {
+                    PropertiesHandler propertiesHandler = new PropertiesHandler();
+                    Connection connection = getConnection(propertiesHandler);
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery("SELECT testcase_priority FROM test_cases WHERE testcase_id = " + testCaseId);
+                    while (resultSet.next()) {
+                        testCasePriority = resultSet.getString("testcase_priority");
+                    }
+                    closeResources(resultSet, statement, connection);
+                } catch (SQLException | ClassNotFoundException e) {
+                    System.out.println(e);
+                }
+                return testCasePriority;
+        }
+
+        public static String getTestCaseTypeById(int testCaseId) {
+                String testCaseType = "";
+                try {
+                    PropertiesHandler propertiesHandler = new PropertiesHandler();
+                    Connection connection = getConnection(propertiesHandler);
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery("SELECT testcase_type FROM test_cases WHERE testcase_id = " + testCaseId);
+                    while (resultSet.next()) {
+                        testCaseType = resultSet.getString("testcase_type");
+                    }
+                    closeResources(resultSet, statement, connection);
+                } catch (SQLException | ClassNotFoundException e) {
+                    System.out.println(e);
+                }
+                return testCaseType;
+        }
+
+        public static String getTestCaseStepsById(int testCaseId) {
+                String testCaseSteps = "";
+                try {
+                    PropertiesHandler propertiesHandler = new PropertiesHandler();
+                    Connection connection = getConnection(propertiesHandler);
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery("SELECT step FROM test_cases WHERE testcase_id = " + testCaseId);
+                    while (resultSet.next()) {
+                        testCaseSteps = resultSet.getString("step");
+                    }
+                    closeResources(resultSet, statement, connection);
+                } catch (SQLException | ClassNotFoundException e) {
+                    System.out.println(e);
+                }
+                return testCaseSteps;
+        }
+
+        public static String getTestCaseExpectedResultById(int testCaseId) {
+                String testCaseExpectedResult = "";
+                try {
+                    PropertiesHandler propertiesHandler = new PropertiesHandler();
+                    Connection connection = getConnection(propertiesHandler);
+                    Statement statement = connection.createStatement();
+                    ResultSet resultSet = statement.executeQuery("SELECT testcase_expected_results FROM test_cases WHERE testcase_id = " + testCaseId);
+                    while (resultSet.next()) {
+                        testCaseExpectedResult = resultSet.getString("testcase_expected_results");
+                    }
+                    closeResources(resultSet, statement, connection);
+                } catch (SQLException | ClassNotFoundException e) {
+                    System.out.println(e);
+                }
+                return testCaseExpectedResult;
+        }
 }
