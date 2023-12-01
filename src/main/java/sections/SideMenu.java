@@ -30,21 +30,29 @@ public class SideMenu extends JPanel {
         title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.LIGHT_GRAY));
 
         // List of buttons
+        OptiSideMenuButton mainMenuButton = new OptiSideMenuButton("Main Menu");
         OptiSideMenuButton createNewTestCaseButton = new OptiSideMenuButton("Create New Test Case");
         OptiSideMenuButton manageTestCasesButton = new OptiSideMenuButton("Manage Test Cases");
-        OptiSideMenuButton createNewRunButton = new OptiSideMenuButton("Create New Run");
-        OptiSideMenuButton manageRunsButton = new OptiSideMenuButton("Manage Runs");
+        OptiSideMenuButton settingsButton = new OptiSideMenuButton("Settings");
         OptiSideMenuButton exitButton = new OptiSideMenuButton("Exit");
 
         // Add components to the panel
         add(title);
+        add(mainMenuButton);
         add(createNewTestCaseButton);
         add(manageTestCasesButton);
-        add(createNewRunButton);
-        add(manageRunsButton);
+        add(settingsButton);
         add(exitButton);
 
         // Add action listeners to the buttons
+
+        // Main Menu Button
+        mainMenuButton.addActionListener(e -> {
+            TestCaseAppManager.getDashboard().removeAll();
+            TestCaseAppManager.getDashboard().add(new MainMenu());
+            TestCaseAppManager.getDashboard().revalidate();
+            TestCaseAppManager.getDashboard().repaint();
+        });
 
         // Create New Test Case Button
         createNewTestCaseButton.addActionListener(e -> {
