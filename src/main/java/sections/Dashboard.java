@@ -6,9 +6,9 @@ public class Dashboard extends JPanel {
 
     public Dashboard() {
 
-        JLabel welcomeLabel = new JLabel("Welcome to the Test Case Manager");
-        welcomeLabel.setBackground(java.awt.Color.RED);
-        add(welcomeLabel);
+        // Set aligment of the object to the center
+        setAlignmentX(CENTER_ALIGNMENT);
+
     }
 
     public Integer getWidthOfDashboard() {

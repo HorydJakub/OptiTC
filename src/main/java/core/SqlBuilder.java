@@ -1,5 +1,6 @@
 package core;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
@@ -278,5 +279,191 @@ public abstract class SqlBuilder {
 
     public static void updateTestCase() {
         // ToDo: Implement update test case
+    }
+
+    public static Boolean isConnected() {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            closeResources(null, null, connection);
+            return true;
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    public static int getNumberOfTestCases() {
+        int numberOfTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM test_cases");
+            while (resultSet.next()) {
+                numberOfTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, statement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfTestCases;
+    }
+
+    public static int getNumberOfFunctionalTestCases() {
+        int numberOfFunctionalTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM test_cases WHERE testcase_type = 'Functional'");
+            while (resultSet.next()) {
+                numberOfFunctionalTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, statement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfFunctionalTestCases;
+    }
+
+    public static int getNumberOfGuiTestCases() {
+        int numberOfGuiTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM test_cases WHERE testcase_type = 'GUI'");
+            while (resultSet.next()) {
+                numberOfGuiTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, statement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfGuiTestCases;
+    }
+
+    public static int getNumberOfPerformanceTestCases() {
+        int numberOfPerformanceTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM test_cases WHERE testcase_type = 'Performance'");
+            while (resultSet.next()) {
+                numberOfPerformanceTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, statement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfPerformanceTestCases;
+    }
+
+    public static int getNumberOfSecurityTestCases() {
+        int numberOfSecurityTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM test_cases WHERE testcase_type = 'Security'");
+            while (resultSet.next()) {
+                numberOfSecurityTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, statement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfSecurityTestCases;
+    }
+
+    public static int getNumberOfUsabilityTestCases() {
+        int numberOfUsabilityTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM test_cases WHERE testcase_type = 'Usability'");
+            while (resultSet.next()) {
+                numberOfUsabilityTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, statement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfUsabilityTestCases;
+    }
+
+    public static int getNumberOfLowPriorityTestCases() {
+        int numberOfLowPriorityTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_cases WHERE testcase_priority = ?");
+            preparedStatement.setString(1, "Low");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                numberOfLowPriorityTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfLowPriorityTestCases;
+    }
+
+    public static int getNumberOfMediumPriorityTestCases() {
+        int numberOfMediumPriorityTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_cases WHERE testcase_priority = ?");
+            preparedStatement.setString(1, "Medium");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                numberOfMediumPriorityTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfMediumPriorityTestCases;
+    }
+
+    public static int getNumberOfHighPriorityTestCases() {
+        int numberOfHighPriorityTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_cases WHERE testcase_priority = ?");
+            preparedStatement.setString(1, "High");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                numberOfHighPriorityTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfHighPriorityTestCases;
+    }
+
+    public static int getNumberOfCriticalPriorityTestCases() {
+        int numberOfCriticalPriorityTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_cases WHERE testcase_priority = ?");
+            preparedStatement.setString(1, "Critical");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                numberOfCriticalPriorityTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfCriticalPriorityTestCases;
     }
 }
