@@ -276,4 +276,7 @@ public abstract class SqlBuilder {
         }
     }
 
+    public static void updateTestCase() {
+        // ToDo: Implement update test case
+    }
 }

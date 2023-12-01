@@ -12,7 +12,7 @@ import javax.swing.*;
 
 public class CreateNewTestCaseMenu extends JPanel {
 
-    private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true);
+    private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true, false);
     public CreateNewTestCaseMenu() {
 
         // Set layout for the panel
@@ -34,7 +34,7 @@ public class CreateNewTestCaseMenu extends JPanel {
         TestCaseTypePanel typePanel = new TestCaseTypePanel(true, Types.FUNCTIONAL);
 
         // Create container panel for AddStepPanel and Add New Step Button
-        stepsContainerPanel = new StepsContainerPanel(true);
+        stepsContainerPanel = new StepsContainerPanel(true, false);
 
         // Create new step button
         AddNewStepButton addNewStepButton = new AddNewStepButton(stepsContainerPanel);

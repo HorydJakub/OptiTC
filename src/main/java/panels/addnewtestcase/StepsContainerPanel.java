@@ -8,7 +8,7 @@ import java.util.List;
 
 public class StepsContainerPanel extends JPanel {
 
-    public StepsContainerPanel(boolean areFieldsEditable) {
+    public StepsContainerPanel(boolean areFieldsEditable, boolean editMode) {
 
         // Set layout for the panel
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -17,7 +17,7 @@ public class StepsContainerPanel extends JPanel {
         AddStepPanel addStepPanel = new AddStepPanel(1, areFieldsEditable);
 
         // Add the first step to the panel only if the fields are editable
-        if (areFieldsEditable) {
+        if (areFieldsEditable && !editMode) {
             add(addStepPanel);
         }
     }
