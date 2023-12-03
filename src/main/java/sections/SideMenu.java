@@ -70,6 +70,14 @@ public class SideMenu extends JPanel {
             TestCaseAppManager.getDashboard().repaint();
         });
 
+        // Settings Button
+        settingsButton.addActionListener(e -> {
+            TestCaseAppManager.getDashboard().removeAll();
+            TestCaseAppManager.getDashboard().add(new SettingsMenu());
+            TestCaseAppManager.getDashboard().revalidate();
+            TestCaseAppManager.getDashboard().repaint();
+        });
+
         exitButton.addActionListener(
                 exitConfirmationPopup -> new ExitConfirmationPopup()
         );
