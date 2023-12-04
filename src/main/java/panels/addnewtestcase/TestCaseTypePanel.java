@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class TestCaseTypePanel extends JPanel {
 
     private JLabel typeLabel;
-    private static JComboBox typeComboBox;
+    private static JComboBox typeComboBox = new JComboBox();
 
     public TestCaseTypePanel(boolean isEditable, Types defaultType) {
 
@@ -16,7 +16,6 @@ public class TestCaseTypePanel extends JPanel {
         typeLabel = new JLabel("Type:");
 
         // Create Type ComboBox
-        typeComboBox = new JComboBox();
         Arrays.stream(Types.values()).toList().forEach(typeComboBox::addItem);
 
         // Select default value

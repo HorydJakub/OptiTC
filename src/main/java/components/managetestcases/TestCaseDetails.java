@@ -22,7 +22,7 @@ public class TestCaseDetails extends JPanel {
         HeaderPanel headerPanel = new HeaderPanel("Test Case Details of: " + testCaseId);
 
         // Create Test Case Title Panel
-        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", testCase.getTestCaseTitle(), false);
+        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:");
 
         // Create Test Case Description Panel
         TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", false);
@@ -47,7 +47,7 @@ public class TestCaseDetails extends JPanel {
         }
 
         // Create Test Case Expected Result Panel
-        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", testCase.getTestCaseExpectedResult(), false);
+        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", false);
 
         // Refresh TestCaseDetails panel
         revalidate();

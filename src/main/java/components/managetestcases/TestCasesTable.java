@@ -4,10 +4,8 @@ import core.SqlBuilder;
 import core.TestCaseAppManager;
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.*;
 
 public class TestCasesTable extends JTable {
 

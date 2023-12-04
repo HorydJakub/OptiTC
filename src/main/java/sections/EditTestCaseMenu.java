@@ -2,10 +2,7 @@ package sections;
 
 import components.HeaderPanel;
 import components.TestCase;
-import components.addnewtestcase.AddNewStepButton;
 import components.managetestcases.SaveChangesButton;
-import enumerates.Priorities;
-import enumerates.Types;
 import panels.addnewtestcase.*;
 
 import javax.swing.*;
@@ -25,7 +22,7 @@ public class EditTestCaseMenu extends JPanel {
         HeaderPanel headerPanel = new HeaderPanel("Edit Test Case of ID: " + testCaseId);
 
         // Create Test Case Title Panel
-        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:",  testCase.getTestCaseTitle(), true);
+        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:");
 
         // Create Test Case Description Panel
         TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", true);
@@ -50,14 +47,14 @@ public class EditTestCaseMenu extends JPanel {
         }
 
         // Create Test Case Expected Result Panel
-        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", testCase.getTestCaseExpectedResult(), true);
+        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", true);
 
         // Refresh TestCaseDetails panel
         revalidate();
         repaint();
 
         // Add save changes button
-        SaveChangesButton saveChangesButton = new SaveChangesButton(testCaseId);
+        SaveChangesButton saveChangesButton = new SaveChangesButton();
         saveChangesButton.setAlignmentX(CENTER_ALIGNMENT);
         saveChangesButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 

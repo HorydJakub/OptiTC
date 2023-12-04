@@ -6,15 +6,12 @@ import javax.swing.*;
 
 public class UrlPanel extends JPanel {
 
-    private static OptiTextField optiTextField;
+    private static OptiTextField optiTextField = new OptiTextField(true, false);
 
     public UrlPanel() {
 
         // Add label
         JLabel label = new JLabel("URL: ");
-
-        // Add text field
-        optiTextField = new OptiTextField(true, false);
 
         // Add components to the panel
         add(label);

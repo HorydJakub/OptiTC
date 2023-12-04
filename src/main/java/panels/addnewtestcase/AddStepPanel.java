@@ -4,8 +4,6 @@ import components.OptiTextField;
 import components.addnewtestcase.RemoveSingleStepButton;
 
 import javax.swing.*;
-import java.util.Arrays;
-import java.util.List;
 
 public class AddStepPanel extends JPanel {
 

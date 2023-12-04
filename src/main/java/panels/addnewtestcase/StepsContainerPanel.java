@@ -24,16 +24,9 @@ public class StepsContainerPanel extends JPanel {
 
     public List<OptiTextField> getStepsTextFieldFromStepsContainerPanel() {
         return Arrays.stream(getComponents())
-                .filter(component -> component instanceof AddStepPanel)
-                .map(component -> (AddStepPanel) component)
+                .filter(AddStepPanel.class::isInstance)
+                .map(AddStepPanel.class::cast)
                 .map(AddStepPanel::getStepTextField)
-                .toList();
-    }
-
-    public List<JPanel> getAddStepPanels() {
-        return Arrays.stream(getComponents())
-                .filter(component -> component instanceof AddStepPanel)
-                .map(component -> (JPanel) component)
                 .toList();
     }
 }

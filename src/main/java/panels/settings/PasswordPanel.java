@@ -6,15 +6,12 @@ import javax.swing.*;
 
 public class PasswordPanel extends JPanel {
 
-    private static OptiTextField textField;
+    private static final OptiTextField textField = new OptiTextField(true, true);
 
     public PasswordPanel() {
 
         // Add label
         JLabel label = new JLabel("Password: ");
-
-        // Add text field
-        textField = new OptiTextField(true, true);
 
         // Add components to the panel
         add(label);

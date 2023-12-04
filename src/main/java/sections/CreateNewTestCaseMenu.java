@@ -12,7 +12,7 @@ import javax.swing.*;
 
 public class CreateNewTestCaseMenu extends JPanel {
 
-    private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true, false);
+    private static final StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true, false);
     public CreateNewTestCaseMenu() {
 
         // Set layout for the panel
@@ -22,7 +22,7 @@ public class CreateNewTestCaseMenu extends JPanel {
         HeaderPanel headerPanel = new HeaderPanel("Create New Test Case");
 
         // Create Test Case Title Panel
-        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", "Please fill out this field!", true);
+        TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:");
 
         // Create Test Case Description Panel
         TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", true);
@@ -34,13 +34,13 @@ public class CreateNewTestCaseMenu extends JPanel {
         TestCaseTypePanel typePanel = new TestCaseTypePanel(true, Types.FUNCTIONAL);
 
         // Create container panel for AddStepPanel and Add New Step Button
-        stepsContainerPanel = new StepsContainerPanel(true, false);
+        new StepsContainerPanel(true, false);
 
         // Create new step button
         AddNewStepButton addNewStepButton = new AddNewStepButton(stepsContainerPanel);
 
         // Create Test Case Expected Result Panel
-        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", "Please fill out this field!", true);
+        TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", true);
 
         // Create Finish Creating Test Case Panel
         FinishCreatingTestCasePanel finishCreatingTestCasePanel = new FinishCreatingTestCasePanel();

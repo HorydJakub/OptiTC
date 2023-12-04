@@ -3,15 +3,13 @@ package panels.addnewtestcase;
 import components.OptiTextField;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class TestCaseTitlePanel extends JPanel {
 
     private JLabel testCaseTitleLabel;
-    private static OptiTextField testCaseTitleTextField;
-    public TestCaseTitlePanel(String testCaseTitleLabelText, String testCaseTitleTextFieldText, boolean isEditable) {
+    private static final OptiTextField testCaseTitleTextField = new OptiTextField(false, false);
+    public TestCaseTitlePanel(String testCaseTitleLabelText) {
         this.testCaseTitleLabel = new JLabel(testCaseTitleLabelText);
-        testCaseTitleTextField = new OptiTextField(isEditable, false);
         add(testCaseTitleLabel);
         add(testCaseTitleTextField);
     }

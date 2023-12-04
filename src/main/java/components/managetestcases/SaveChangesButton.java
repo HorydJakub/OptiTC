@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class SaveChangesButton extends JButton {
 
-  public SaveChangesButton(int testCaseId) {
+  public SaveChangesButton() {
             super("Save Changes");
             addActionListener(e -> saveChanges());
         }

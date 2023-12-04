@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class TestCasePriorityPanel extends JPanel {
 
     private JLabel priorityLabel;
-    private static JComboBox priorityComboBox;
+    private static final JComboBox priorityComboBox = new JComboBox();
 
     public TestCasePriorityPanel(boolean isEditable, Priorities defaultPriority) {
 
@@ -16,7 +16,6 @@ public class TestCasePriorityPanel extends JPanel {
         priorityLabel = new JLabel("Priority:");
 
         // Create Priority ComboBox
-        priorityComboBox = new JComboBox();
         Arrays.stream(Priorities.values()).toList().forEach(priorityComboBox::addItem);
 
         // Select default value

@@ -1,7 +1,6 @@
 package components.addnewtestcase;
 
 import components.OptiTextField;
-import core.PropertiesHandler;
 import core.SqlBuilder;
 import core.TestCaseAppManager;
 import panels.addnewtestcase.*;
@@ -9,9 +8,6 @@ import sections.CreateNewTestCaseMenu;
 import sections.TestCaseAddedMenu;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +47,9 @@ public class SaveTestCaseButton extends JButton {
         testCaseDetails.put("Priority", TestCasePriorityPanel.getPriorityComboBox());
         testCaseDetails.put("Type", TestCaseTypePanel.getTypeComboBox());
         testCaseDetails.put("Expected Results", TestCaseExpectedResultsPanel.getTestCaseExpectedResultsTextField());
-        CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().forEach(stepTextField -> {
-            testCaseDetails.put("Step " + (CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().indexOf(stepTextField) + 1), stepTextField.getText());
-        });
-
+        CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().forEach(stepTextField ->
+                testCaseDetails.put("Step " + (CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().indexOf(stepTextField) + 1), stepTextField.getText()
+                ));
     }
 
     private List<String> getNotFilledFieldsList() {

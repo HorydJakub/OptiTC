@@ -20,9 +20,7 @@ public class RemoveSingleStepButton extends JButton {
 
 
         // Add listener on click
-        addActionListener(e -> {
-            removeStepById();
-        });
+        addActionListener(e -> removeStepById());
     }
 
     private void removeStepById() {

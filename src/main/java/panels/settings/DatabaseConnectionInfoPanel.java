@@ -1,6 +1,5 @@
 package panels.settings;
 
-import components.OptiTextField;
 import enumerates.SupportedDatabases;
 
 import javax.swing.*;
@@ -19,7 +18,7 @@ public class DatabaseConnectionInfoPanel extends JPanel {
         label.setFont(label.getFont().deriveFont(java.awt.Font.BOLD));
 
         // Center text
-        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Top margin
         label.setBorder(BorderFactory.createEmptyBorder(30, 0, 0, 0));

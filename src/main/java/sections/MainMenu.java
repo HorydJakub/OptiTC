@@ -1,8 +1,6 @@
 package sections;
 
 import components.HeaderPanel;
-import core.ConstantValues;
-import core.TestCaseAppManager;
 import panels.mainmenu.AuthorsPanel;
 import panels.mainmenu.ConnectionToDatabasePanel;
 

@@ -3,14 +3,10 @@ package sections;
 import components.ExitConfirmationPopup;
 import components.OptiSideMenuButton;
 import core.ConstantValues;
-import core.SqlBuilder;
 import core.TestCaseAppManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class SideMenu extends JPanel {
 
@@ -24,8 +20,8 @@ public class SideMenu extends JPanel {
 
         // Title of application
         JLabel title = new JLabel(ConstantValues.APP_NAME + " " + ConstantValues.APP_VERSION);
-        title.setHorizontalAlignment(JLabel.CENTER);
-        title.setVerticalAlignment(JLabel.CENTER);
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setVerticalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.LIGHT_GRAY));
 

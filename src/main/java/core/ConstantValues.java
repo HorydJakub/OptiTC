@@ -4,7 +4,11 @@ import enumerates.Priorities;
 
 import java.awt.*;
 
-public abstract class ConstantValues {
+public final class ConstantValues {
+
+    private ConstantValues() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static final String APP_NAME = "OptiTC";
     public static final String APP_VERSION = "1.0";
