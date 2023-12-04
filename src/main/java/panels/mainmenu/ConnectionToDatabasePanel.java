@@ -16,8 +16,10 @@ public class ConnectionToDatabasePanel extends JPanel {
 
         if (SqlBuilder.isConnected()) {
             connectionStatusLabel = new JLabel("You are connected to database. You can start using the application.");
+            connectionStatusLabel.setForeground(java.awt.Color.GREEN);
         } else {
             connectionStatusLabel = new JLabel("Not connected to database. Please click on button below to configure your connection.");
+            connectionStatusLabel.setForeground(java.awt.Color.RED);
         }
 
         // Set the alignment of the object to the center
@@ -32,13 +34,6 @@ public class ConnectionToDatabasePanel extends JPanel {
         // Set italics
         connectionStatusLabel.setFont(connectionStatusLabel.getFont().deriveFont(connectionStatusLabel.getFont().getStyle() | java.awt.Font.ITALIC));
 
-        // Authors panel
-
-        // Set red color for the text if not connected to database
-        if (!SqlBuilder.isConnected()) {
-            connectionStatusLabel.setForeground(java.awt.Color.RED);
-        }
-
         // Add components to the panel
         add(connectionStatusLabel);
 
@@ -47,9 +42,7 @@ public class ConnectionToDatabasePanel extends JPanel {
             configureConnectionToDatabaseButton = new ConfigureConnectionToDatabaseButton();
             configureConnectionToDatabaseButton.setAlignmentX(CENTER_ALIGNMENT);
             add(configureConnectionToDatabaseButton);
-        }
-
-        if (SqlBuilder.isConnected()) {
+        } else {
             TestCasesStatisticsPanel testCasesStatisticsPanel = new TestCasesStatisticsPanel();
             add(testCasesStatisticsPanel);
         }

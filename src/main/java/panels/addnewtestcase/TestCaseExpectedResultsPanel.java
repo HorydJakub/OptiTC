@@ -11,7 +11,7 @@ public class TestCaseExpectedResultsPanel extends JPanel {
     private static OptiTextField testCaseExpectedResultsTextField;
     public TestCaseExpectedResultsPanel(String testCaseExpectedResultsLabelText, String testCaseExpectedResultsTextFieldText, boolean isEditable) {
         this.testCaseExpectedResultsLabel = new JLabel(testCaseExpectedResultsLabelText);
-        testCaseExpectedResultsTextField = new OptiTextField(testCaseExpectedResultsTextFieldText, 500, 30, isEditable);
+        testCaseExpectedResultsTextField = new OptiTextField(isEditable, false);
         add(testCaseExpectedResultsLabel);
         add(testCaseExpectedResultsTextField);
     }

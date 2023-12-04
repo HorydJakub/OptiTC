@@ -25,7 +25,7 @@ public class TestCaseDetails extends JPanel {
         TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", testCase.getTestCaseTitle(), false);
 
         // Create Test Case Description Panel
-        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", testCase.getTestCaseDescription(), false);
+        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", false);
 
         // Create Test Case Priority Panel
         TestCasePriorityPanel priorityPanel = new TestCasePriorityPanel(false, testCase.getTestCasePriority());

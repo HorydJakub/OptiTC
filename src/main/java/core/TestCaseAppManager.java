@@ -39,6 +39,9 @@ public class TestCaseAppManager extends JFrame {
 
         // Show main menu by default
         dashboard.add(mainMenu);
+
+        // Check if file default.properties exists if not create it
+        PropertiesHandler.createDefaultPropertiesFile();
     }
 
     public static Dashboard getDashboard() {

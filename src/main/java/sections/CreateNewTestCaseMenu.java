@@ -25,7 +25,7 @@ public class CreateNewTestCaseMenu extends JPanel {
         TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:", "Please fill out this field!", true);
 
         // Create Test Case Description Panel
-        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", "Please fill out this field!", true);
+        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", true);
 
         // Create Test Case Priority Panel
         TestCasePriorityPanel priorityPanel = new TestCasePriorityPanel(true, Priorities.MEDIUM);
