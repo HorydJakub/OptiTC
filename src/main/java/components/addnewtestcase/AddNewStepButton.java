@@ -23,6 +23,11 @@ public class AddNewStepButton extends JButton {
         });
     }
 
+    public static void decrementStepsCount() {
+        currentStepCount--;
+    }
+
+
     private void addNewStep() {
         if (currentStepCount < maximumNumberOfSteps) {
             currentStepCount++;

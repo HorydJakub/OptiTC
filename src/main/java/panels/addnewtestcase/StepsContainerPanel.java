@@ -22,6 +22,24 @@ public class StepsContainerPanel extends JPanel {
         }
     }
 
+    public void updateStepNumbers() {
+        // Pobierz listę paneli kroków
+        List<AddStepPanel> stepPanels = getStepsPanelFromStepsContainerPanel();
+
+        // Iteruj przez listę paneli kroków i aktualizuj numerację
+        for (int i = 0; i < stepPanels.size(); i++) {
+            AddStepPanel stepPanel = stepPanels.get(i);
+            stepPanel.updateStepNumber(i + 1); // Aktualizuj numer kroku
+        }
+    }
+
+    public List<AddStepPanel> getStepsPanelFromStepsContainerPanel() {
+        return Arrays.stream(getComponents())
+                .filter(component -> component instanceof AddStepPanel)
+                .map(component -> (AddStepPanel) component)
+                .toList();
+    }
+
     public List<OptiTextField> getStepsTextFieldFromStepsContainerPanel() {
         return Arrays.stream(getComponents())
                 .filter(component -> component instanceof AddStepPanel)

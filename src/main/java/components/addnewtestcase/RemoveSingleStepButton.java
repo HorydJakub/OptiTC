@@ -1,8 +1,11 @@
 package components.addnewtestcase;
 
+import panels.addnewtestcase.AddStepPanel;
+import panels.addnewtestcase.StepsContainerPanel;
 import sections.CreateNewTestCaseMenu;
 
 import javax.swing.*;
+import java.util.List;
 
 public class RemoveSingleStepButton extends JButton {
 
@@ -20,9 +23,7 @@ public class RemoveSingleStepButton extends JButton {
 
 
         // Add listener on click
-        addActionListener(e -> {
-            removeStepById();
-        });
+        addActionListener(e -> removeStepById());
     }
 
     private void removeStepById() {
@@ -31,15 +32,30 @@ public class RemoveSingleStepButton extends JButton {
         JPanel addStepPanel = (JPanel) getParent();
 
         // Get the steps container panel
-        JPanel stepsContainerPanel = CreateNewTestCaseMenu.getStepsContainerPanel();
+        StepsContainerPanel stepsContainerPanel = CreateNewTestCaseMenu.getStepsContainerPanel();
 
         // Remove the add step panel from the steps container panel
         stepsContainerPanel.remove(addStepPanel);
 
+        // Update step numbers
+        updateStepNumbers(stepsContainerPanel);
+
         // Repaint the steps container panel
         stepsContainerPanel.repaint();
 
-        // Reset the steps count
-        AddNewStepButton.resetStepsCount();
+        // Revalidate the steps container panel
+        stepsContainerPanel.revalidate();
+
+        // Decrement the steps count
+        AddNewStepButton.decrementStepsCount();
+    }
+
+    private void updateStepNumbers(StepsContainerPanel stepsContainerPanel) {
+        List<AddStepPanel> stepPanels = stepsContainerPanel.getStepsPanelFromStepsContainerPanel();
+
+        for (int i = 0; i < stepPanels.size(); i++) {
+            AddStepPanel stepPanel = stepPanels.get(i);
+            stepPanel.updateStepNumber(i + 1); // Aktualizuj numer kroku
+        }
     }
 }

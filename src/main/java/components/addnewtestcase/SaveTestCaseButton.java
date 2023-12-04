@@ -1,7 +1,6 @@
 package components.addnewtestcase;
 
 import components.OptiTextField;
-import core.PropertiesHandler;
 import core.SqlBuilder;
 import core.TestCaseAppManager;
 import panels.addnewtestcase.*;
@@ -9,9 +8,7 @@ import sections.CreateNewTestCaseMenu;
 import sections.TestCaseAddedMenu;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +48,16 @@ public class SaveTestCaseButton extends JButton {
         testCaseDetails.put("Priority", TestCasePriorityPanel.getPriorityComboBox());
         testCaseDetails.put("Type", TestCaseTypePanel.getTypeComboBox());
         testCaseDetails.put("Expected Results", TestCaseExpectedResultsPanel.getTestCaseExpectedResultsTextField());
-        CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().forEach(stepTextField -> {
-            testCaseDetails.put("Step " + (CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel().indexOf(stepTextField) + 1), stepTextField.getText());
-        });
 
+        testCaseDetails.entrySet().removeIf(entry -> entry.getKey().startsWith("Step"));
+
+        List<OptiTextField> stepsTextFieldFromStepsContainerPanel = CreateNewTestCaseMenu.getStepsContainerPanel().getStepsTextFieldFromStepsContainerPanel();
+
+        for (int i = 0; i < stepsTextFieldFromStepsContainerPanel.size(); i++) {
+            String stepKey = "Step " + (i + 1);
+            String stepText = stepsTextFieldFromStepsContainerPanel.get(i).getText();
+            testCaseDetails.put(stepKey, stepText);
+        }
     }
 
     private List<String> getNotFilledFieldsList() {
@@ -83,8 +86,36 @@ public class SaveTestCaseButton extends JButton {
     }
 
     private void showErrorMessage(List<String> listOfNotFieldWithDefaultValues) {
-        if (!listOfNotFieldWithDefaultValues.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please fill out the following fields: " + listOfNotFieldWithDefaultValues);
+        List<String> orderedFields = new ArrayList<>();
+
+        // Add fields to the list in the preferred order
+        orderedFields.add("Title");
+        orderedFields.add("Description");
+        orderedFields.addAll(listOfNotFieldWithDefaultValues.stream()
+                .filter(field -> !field.equals("Title") && !field.equals("Description") && !field.equals("Expected Results"))
+                .toList());
+        orderedFields.add("Expected Results");
+
+        // Create a formatted message with sorted fields
+        StringBuilder message = new StringBuilder("Please fill out the following fields: ");
+
+        for (String field : orderedFields) {
+            if (listOfNotFieldWithDefaultValues.contains(field)) {
+                // If the field should not be filled, apply red font color
+                message.append("<font color='red'>").append(field).append("</font>").append(", ");
+            } else {
+                message.append(field).append(", ");
+            }
         }
+
+        // Remove the last comma and space
+        if (!message.isEmpty()) {
+            message.setLength(message.length() - 2);
+        }
+
+        // Show the message with HTML formatting for color
+        JOptionPane.showMessageDialog(null, "<html>" + message + "</html>");
     }
+
 }
+
