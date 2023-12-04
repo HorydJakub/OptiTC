@@ -4,8 +4,6 @@ import components.OptiTextField;
 import components.addnewtestcase.RemoveSingleStepButton;
 
 import javax.swing.*;
-import java.util.Arrays;
-import java.util.List;
 
 public class AddStepPanel extends JPanel {
 
@@ -41,6 +39,13 @@ public class AddStepPanel extends JPanel {
 
     public int getStepId() {
         return stepNumber;
+    }
+
+    public void updateStepNumber(int newStepNumber) {
+        stepNumber = newStepNumber;
+        // Zaktualizuj etykietę kroku
+        JLabel stepLabel = (JLabel) getComponent(0);
+        stepLabel.setText("Step: " + newStepNumber);
     }
 }
 
