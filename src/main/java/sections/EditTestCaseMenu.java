@@ -28,7 +28,7 @@ public class EditTestCaseMenu extends JPanel {
         TestCaseTitlePanel testCaseTitlePanel = new TestCaseTitlePanel("Test Case Title:",  testCase.getTestCaseTitle(), true);
 
         // Create Test Case Description Panel
-        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", testCase.getTestCaseDescription(), true);
+        TestCaseDescriptionPanel descriptionPanel = new TestCaseDescriptionPanel("Test Case Description:", true);
 
         // Create Test Case Priority Panel
         TestCasePriorityPanel priorityPanel = new TestCasePriorityPanel(true, testCase.getTestCasePriority());

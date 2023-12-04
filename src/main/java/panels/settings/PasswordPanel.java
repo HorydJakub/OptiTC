@@ -14,7 +14,7 @@ public class PasswordPanel extends JPanel {
         JLabel label = new JLabel("Password: ");
 
         // Add text field
-        textField = new OptiTextField("Please fill out this field!", 500, 30, true);
+        textField = new OptiTextField(true, true);
 
         // Add components to the panel
         add(label);

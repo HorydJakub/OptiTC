@@ -281,7 +281,7 @@ public abstract class SqlBuilder {
         // ToDo: Implement update test case
     }
 
-    public static Boolean isConnected() {
+    public static boolean isConnected() {
         try {
             PropertiesHandler propertiesHandler = new PropertiesHandler();
             Connection connection = getConnection(propertiesHandler);

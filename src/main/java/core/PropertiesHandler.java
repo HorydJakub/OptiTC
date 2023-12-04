@@ -10,34 +10,18 @@ import java.util.Properties;
 
 public class PropertiesHandler {
 
-    private Properties properties = new Properties();
+    private Properties properties;
 
     public PropertiesHandler() {
         loadProperties();
     }
 
     public static void updatePropertiesFile(String url, String username, String password) {
-
-        // Update the values
         PropertiesHandler propertiesHandler = new PropertiesHandler();
-        propertiesHandler.properties.setProperty("sql.url", "\"" + url + "\"");
-        propertiesHandler.properties.setProperty("sql.user", "\"" + username + "\"");
-        propertiesHandler.properties.setProperty("sql.password", "\"" + password + "\"");
-
-        // Save the file
+        propertiesHandler.properties.setProperty("sql.url", url);
+        propertiesHandler.properties.setProperty("sql.user", username);
+        propertiesHandler.properties.setProperty("sql.password", password);
         propertiesHandler.saveProperties();
-    }
-
-    public static void createPropertiesFile(String url, String username, String password) {
-
-            // Create the file
-            PropertiesHandler propertiesHandler = new PropertiesHandler();
-            propertiesHandler.properties.setProperty("sql.url", "\"" + url + "\"");
-            propertiesHandler.properties.setProperty("sql.user", "\"" + username + "\"");
-            propertiesHandler.properties.setProperty("sql.password", "\"" + password + "\"");
-
-            // Save the file
-            propertiesHandler.saveProperties();
     }
 
     public static void createDefaultPropertiesFile() {
@@ -59,29 +43,33 @@ public class PropertiesHandler {
             }
         }
     }
-    private void saveProperties() {
+
+    private void loadProperties() {
+        properties = new Properties();
         try {
-            String filePath = PropertiesHandler.class.getClassLoader().getResource("default.properties").getPath();
-            if (filePath != null) {
-                FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-                properties.store(fileOutputStream, null);
-                fileOutputStream.close();
+            InputStream inputStream = PropertiesHandler.class.getClassLoader().getResourceAsStream("config.properties");
+            if (inputStream != null) {
+                properties.load(inputStream);
+                inputStream.close();
             } else {
-                System.out.println("Sorry, unable to find default.properties");
+                System.out.println("Sorry, unable to find config.properties");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadProperties() {
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
+    private void saveProperties() {
+        try {
+            String filePath = PropertiesHandler.class.getClassLoader().getResource("config.properties").getPath();
+            if (filePath != null) {
+                FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+                properties.store(fileOutputStream, null);
+                fileOutputStream.close();
+            } else {
                 System.out.println("Sorry, unable to find config.properties");
-                return;
             }
-            properties.load(input);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -115,9 +103,5 @@ public class PropertiesHandler {
             password = "";
         }
         return password;
-    }
-
-    public static boolean isDefaultPropertiesFileExists() {
-        return PropertiesHandler.class.getClassLoader().getResource("default.properties") != null;
     }
 }

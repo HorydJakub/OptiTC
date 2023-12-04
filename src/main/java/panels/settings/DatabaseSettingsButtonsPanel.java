@@ -18,8 +18,7 @@ public class DatabaseSettingsButtonsPanel extends JPanel {
         // Add action listeners
         saveButton.addActionListener(e -> {
             if (getListOfEmptyFields().isEmpty()) {
-                // Update the properties file
-                // ToDO: Add password field
+                PropertiesHandler.updatePropertiesFile(UrlPanel.getOptiTextField().getText(), UsernamePanel.getOptiTextField().getText(), PasswordPanel.getOptiTextField().getText());
                 JOptionPane.showMessageDialog(null, "The settings have been saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Please fill out the following fields: " + getListOfEmptyFields(), "Error", JOptionPane.ERROR_MESSAGE);
