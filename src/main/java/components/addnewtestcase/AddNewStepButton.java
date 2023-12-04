@@ -3,6 +3,7 @@ package components.addnewtestcase;
 import panels.addnewtestcase.AddStepPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AddNewStepButton extends JButton {
 
@@ -15,12 +16,10 @@ public class AddNewStepButton extends JButton {
         this.stepsContainerPanel = stepsContainerPanel;
 
         // Set button alignment
-        setAlignmentX(JButton.CENTER_ALIGNMENT);
+        setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Add action listener
-        addActionListener(e -> {
-            addNewStep();
-        });
+        addActionListener(e -> addNewStep());
     }
 
     private void addNewStep() {

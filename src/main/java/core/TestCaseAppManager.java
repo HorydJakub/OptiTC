@@ -26,7 +26,7 @@ public class TestCaseAppManager extends JFrame {
         setVisible(true);
 
         // Set the default close operation
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // LAYOUT MANAGER
         // Set the layout of the frame

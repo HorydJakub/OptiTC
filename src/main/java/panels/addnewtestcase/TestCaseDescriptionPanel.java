@@ -3,7 +3,6 @@ package panels.addnewtestcase;
 import components.OptiTextField;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class TestCaseDescriptionPanel extends JPanel {
 
