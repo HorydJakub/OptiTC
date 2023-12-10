@@ -10,7 +10,7 @@ public class AddStepPanel extends JPanel {
     private OptiTextField stepTextField;
     private int stepNumber;
 
-    public AddStepPanel(int stepNumber, boolean areFieldsEditable) {
+    public AddStepPanel(int stepNumber, StepsContainerPanel stepsContainerPanel, boolean areFieldsEditable) {
         this.stepNumber = stepNumber;
 
         // Create Step Label
@@ -21,7 +21,7 @@ public class AddStepPanel extends JPanel {
 
         // Remove single step button only when stepNumber is greater than 1
         if (stepNumber > 1 && areFieldsEditable) {
-            RemoveSingleStepButton removeSingleStepButton = new RemoveSingleStepButton();
+            RemoveSingleStepButton removeSingleStepButton = new RemoveSingleStepButton(stepsContainerPanel);
             // Add components to the panel
             add(stepLabel);
             add(stepTextField);

@@ -13,6 +13,8 @@ import javax.swing.*;
 public class EditTestCaseMenu extends JPanel {
 
     private TestCase testCase;
+    private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true, true);
+
 
     public EditTestCaseMenu(int testCaseId) {
 
@@ -40,14 +42,17 @@ public class EditTestCaseMenu extends JPanel {
         int sizeOfSteps = testCase.getTestCaseStepsValuesAsList().size();
 
         // Create container panel for AddStepPanel
-        StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true, true);
+        stepsContainerPanel = new StepsContainerPanel(true, true);
 
         // Create AddStepPanel for each step
         for (int i = 0; i < sizeOfSteps; i++) {
-            AddStepPanel addStepPanel = new AddStepPanel(i + 1, true);
+            AddStepPanel addStepPanel = new AddStepPanel(i + 1, stepsContainerPanel, true);
             addStepPanel.getStepTextField().setText(testCase.getTestCaseStepsValuesAsList().get(i));
             stepsContainerPanel.add(addStepPanel);
         }
+
+        // Create new step button
+        AddNewStepButton addNewStepButton = new AddNewStepButton(stepsContainerPanel);
 
         // Create Test Case Expected Result Panel
         TestCaseExpectedResultsPanel expectedResultsPanel = new TestCaseExpectedResultsPanel("Expected Result:", testCase.getTestCaseExpectedResult(), true);
@@ -61,6 +66,9 @@ public class EditTestCaseMenu extends JPanel {
         saveChangesButton.setAlignmentX(CENTER_ALIGNMENT);
         saveChangesButton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        // Set the current step count
+        AddNewStepButton.setCurrentStepCount(sizeOfSteps);
+
         // Add components to the main panel
         add(headerPanel);
         add(testCaseTitlePanel);
@@ -68,7 +76,12 @@ public class EditTestCaseMenu extends JPanel {
         add(priorityPanel);
         add(typePanel);
         add(stepsContainerPanel);
+        add(addNewStepButton);
         add(expectedResultsPanel);
         add(saveChangesButton);
+    }
+
+    public static StepsContainerPanel getStepsContainerPanel() {
+        return stepsContainerPanel;
     }
 }

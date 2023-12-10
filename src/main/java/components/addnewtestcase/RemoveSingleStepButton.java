@@ -2,15 +2,17 @@ package components.addnewtestcase;
 
 import panels.addnewtestcase.AddStepPanel;
 import panels.addnewtestcase.StepsContainerPanel;
-import sections.CreateNewTestCaseMenu;
 
 import javax.swing.*;
 import java.util.List;
 
 public class RemoveSingleStepButton extends JButton {
 
-    public RemoveSingleStepButton() {
+    private final StepsContainerPanel stepsContainerPanel;
+
+    public RemoveSingleStepButton(StepsContainerPanel stepsContainerPanel) {
         super("X");
+        this.stepsContainerPanel = stepsContainerPanel;
 
         // Design for the button
         setFocusPainted(false);
@@ -21,7 +23,6 @@ public class RemoveSingleStepButton extends JButton {
         // Set font to red
         setForeground(java.awt.Color.RED);
 
-
         // Add listener on click
         addActionListener(e -> removeStepById());
     }
@@ -31,14 +32,11 @@ public class RemoveSingleStepButton extends JButton {
         // Get the add step panel
         JPanel addStepPanel = (JPanel) getParent();
 
-        // Get the steps container panel
-        StepsContainerPanel stepsContainerPanel = CreateNewTestCaseMenu.getStepsContainerPanel();
-
         // Remove the add step panel from the steps container panel
         stepsContainerPanel.remove(addStepPanel);
 
         // Update step numbers
-        updateStepNumbers(stepsContainerPanel);
+        updateStepNumbers();
 
         // Repaint the steps container panel
         stepsContainerPanel.repaint();
@@ -50,12 +48,12 @@ public class RemoveSingleStepButton extends JButton {
         AddNewStepButton.decrementStepsCount();
     }
 
-    private void updateStepNumbers(StepsContainerPanel stepsContainerPanel) {
+    private void updateStepNumbers() {
         List<AddStepPanel> stepPanels = stepsContainerPanel.getStepsPanelFromStepsContainerPanel();
 
         for (int i = 0; i < stepPanels.size(); i++) {
             AddStepPanel stepPanel = stepPanels.get(i);
-            stepPanel.updateStepNumber(i + 1); // Aktualizuj numer kroku
+            stepPanel.updateStepNumber(i + 1);
         }
     }
 }
