@@ -1,5 +1,7 @@
 package core;
 
+import components.TestCase;
+
 import java.awt.*;
 import java.sql.*;
 import java.util.HashMap;
@@ -277,10 +279,6 @@ public abstract class SqlBuilder {
         }
     }
 
-    public static void updateTestCase() {
-        // ToDo: Implement update test case
-    }
-
     public static Boolean isConnected() {
         try {
             PropertiesHandler propertiesHandler = new PropertiesHandler();
@@ -465,5 +463,26 @@ public abstract class SqlBuilder {
             System.out.println(e);
         }
         return numberOfCriticalPriorityTestCases;
+    }
+
+    public static void updateTestCase() {
+    }
+
+    public static int getNumberOfSmokeTestCases() {
+        int numberOfSmokeTestCases = 0;
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_cases WHERE testcase_type = ?");
+            preparedStatement.setString(1, "Smoke");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                numberOfSmokeTestCases = resultSet.getInt(1);
+            }
+            closeResources(resultSet, preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+        return numberOfSmokeTestCases;
     }
 }

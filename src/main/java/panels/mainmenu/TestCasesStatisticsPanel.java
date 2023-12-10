@@ -3,83 +3,51 @@ package panels.mainmenu;
 import core.SqlBuilder;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestCasesStatisticsPanel extends JPanel {
 
+    private final Map<String, Integer> statisticsMap = new HashMap<>();
+
     public TestCasesStatisticsPanel() {
-
-        // some statistics
-        int numberOfTestCases = SqlBuilder.getNumberOfTestCases();
-        int numberOfFunctionalTestCases = SqlBuilder.getNumberOfFunctionalTestCases();
-        int numberOfGuiTestCases = SqlBuilder.getNumberOfGuiTestCases();
-        int numberOfPerformanceTestCases = SqlBuilder.getNumberOfPerformanceTestCases();
-        int numberOfSecurityTestCases = SqlBuilder.getNumberOfSecurityTestCases();
-        int numberOfUsabilityTestCases = SqlBuilder.getNumberOfUsabilityTestCases();
-
-        // Set layout
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        // Statistic label:
-        JLabel statisticLabel = new JLabel("This is the list of statistics: ");
+        statisticsMap.put("Number of test cases", SqlBuilder.getNumberOfTestCases());
+        statisticsMap.put("Number of functional test cases", SqlBuilder.getNumberOfFunctionalTestCases());
+        statisticsMap.put("Number of GUI test cases", SqlBuilder.getNumberOfGuiTestCases());
+        statisticsMap.put("Number of performance test cases", SqlBuilder.getNumberOfPerformanceTestCases());
+        statisticsMap.put("Number of security test cases", SqlBuilder.getNumberOfSecurityTestCases());
+        statisticsMap.put("Number of usability test cases", SqlBuilder.getNumberOfUsabilityTestCases());
+        statisticsMap.put("Number of smoke test cases", SqlBuilder.getNumberOfSmokeTestCases());
 
-        // Set statistic label to center
-        statisticLabel.setAlignmentX(CENTER_ALIGNMENT);
+        addStatisticLabels();
+    }
 
-        // Set bigger font for statistic label
-        statisticLabel.setFont(statisticLabel.getFont().deriveFont(16.0f));
+    private void addStatisticLabels() {
+        JLabel statisticLabel = new JLabel("This is the list of statistics:");
+        formatLabel(statisticLabel, true);
 
-        // Set italic for statistic label
-        statisticLabel.setFont(statisticLabel.getFont().deriveFont(statisticLabel.getFont().getStyle() | java.awt.Font.ITALIC));
-
-        // create labels
-        JLabel numberOfTestCasesLabel = new JLabel("Number of test cases: " + numberOfTestCases);
-        JLabel numberOfFunctionalTestCasesLabel = new JLabel("Number of functional test cases: " + numberOfFunctionalTestCases);
-        JLabel numberOfGuiTestCasesLabel = new JLabel("Number of GUI test cases: " + numberOfGuiTestCases);
-        JLabel numberOfPerformanceTestCasesLabel = new JLabel("Number of performance test cases: " + numberOfPerformanceTestCases);
-        JLabel numberOfSecurityTestCasesLabel = new JLabel("Number of security test cases: " + numberOfSecurityTestCases);
-        JLabel numberOfUsabilityTestCasesLabel = new JLabel("Number of usability test cases: " + numberOfUsabilityTestCases);
-
-        // Center every label
-        numberOfTestCasesLabel.setAlignmentX(CENTER_ALIGNMENT);
-        numberOfFunctionalTestCasesLabel.setAlignmentX(CENTER_ALIGNMENT);
-        numberOfGuiTestCasesLabel.setAlignmentX(CENTER_ALIGNMENT);
-        numberOfPerformanceTestCasesLabel.setAlignmentX(CENTER_ALIGNMENT);
-        numberOfSecurityTestCasesLabel.setAlignmentX(CENTER_ALIGNMENT);
-        numberOfUsabilityTestCasesLabel.setAlignmentX(CENTER_ALIGNMENT);
-
-        // Set margin for every label
-        numberOfTestCasesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        numberOfFunctionalTestCasesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        numberOfGuiTestCasesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        numberOfPerformanceTestCasesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        numberOfSecurityTestCasesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        numberOfUsabilityTestCasesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-
-        // Set color to gray and italic for every label
-        numberOfTestCasesLabel.setForeground(java.awt.Color.GRAY);
-        numberOfFunctionalTestCasesLabel.setForeground(java.awt.Color.GRAY);
-        numberOfGuiTestCasesLabel.setForeground(java.awt.Color.GRAY);
-        numberOfPerformanceTestCasesLabel.setForeground(java.awt.Color.GRAY);
-        numberOfSecurityTestCasesLabel.setForeground(java.awt.Color.GRAY);
-        numberOfUsabilityTestCasesLabel.setForeground(java.awt.Color.GRAY);
-
-        numberOfTestCasesLabel.setFont(numberOfTestCasesLabel.getFont().deriveFont(numberOfTestCasesLabel.getFont().getStyle() | java.awt.Font.ITALIC));
-        numberOfFunctionalTestCasesLabel.setFont(numberOfFunctionalTestCasesLabel.getFont().deriveFont(numberOfFunctionalTestCasesLabel.getFont().getStyle() | java.awt.Font.ITALIC));
-        numberOfGuiTestCasesLabel.setFont(numberOfGuiTestCasesLabel.getFont().deriveFont(numberOfGuiTestCasesLabel.getFont().getStyle() | java.awt.Font.ITALIC));
-        numberOfPerformanceTestCasesLabel.setFont(numberOfPerformanceTestCasesLabel.getFont().deriveFont(numberOfPerformanceTestCasesLabel.getFont().getStyle() | java.awt.Font.ITALIC));
-        numberOfSecurityTestCasesLabel.setFont(numberOfSecurityTestCasesLabel.getFont().deriveFont(numberOfSecurityTestCasesLabel.getFont().getStyle() | java.awt.Font.ITALIC));
-        numberOfUsabilityTestCasesLabel.setFont(numberOfUsabilityTestCasesLabel.getFont().deriveFont(numberOfUsabilityTestCasesLabel.getFont().getStyle() | java.awt.Font.ITALIC));
-
-
-
-        // Add labels to panel
         add(statisticLabel);
-        add(numberOfTestCasesLabel);
-        add(numberOfFunctionalTestCasesLabel);
-        add(numberOfGuiTestCasesLabel);
-        add(numberOfPerformanceTestCasesLabel);
-        add(numberOfSecurityTestCasesLabel);
-        add(numberOfUsabilityTestCasesLabel);
 
+        for (String statistic : statisticsMap.keySet()) {
+            JLabel label = new JLabel(statistic + ": " + statisticsMap.get(statistic));
+            formatLabel(label, false);
+            add(label);
+        }
+    }
+
+    private void formatLabel(JLabel label, boolean isHeader) {
+        label.setAlignmentX(CENTER_ALIGNMENT);
+        label.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+
+        if (isHeader) {
+            label.setFont(label.getFont().deriveFont(Font.BOLD | Font.ITALIC, 16.0f));
+            label.setForeground(Color.GRAY);
+        } else {
+            label.setFont(label.getFont().deriveFont(Font.ITALIC));
+            label.setForeground(Color.GRAY);
+        }
     }
 }
