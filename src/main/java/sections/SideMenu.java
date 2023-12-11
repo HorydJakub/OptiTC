@@ -9,77 +9,71 @@ import core.TestCaseAppManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class SideMenu extends JPanel {
 
     public SideMenu() {
-
-        // The left menu width should be at leat 1/6 of width of the screen
-        setPreferredSize(new Dimension(ConstantValues.SCREEN_WIDTH/6, ConstantValues.SCREEN_HEIGHT));
-
-        // Set the layout of the panel
+        setPreferredSize(new Dimension(ConstantValues.SCREEN_WIDTH / 6, ConstantValues.SCREEN_HEIGHT));
         setLayout(new GridLayout(6, 1));
 
-        // Title of application
+        addTitleLabel();
+        addMenuButton("Main Menu", () -> switchDashboardContent(new MainMenu()));
+
+        addMenuButton("Create New Test Case", () -> {
+            if (!SqlBuilder.isConnected()) {
+                showConnectionErrorMessage();
+                switchDashboardContent(new SettingsMenu());
+            } else {
+                switchDashboardContent(new CreateNewTestCaseMenu());
+            }
+        });
+
+        addMenuButton("Manage Test Cases", () -> {
+            if (!SqlBuilder.isConnected()) {
+                showConnectionErrorMessage();
+                switchDashboardContent(new SettingsMenu());
+            } else {
+                switchDashboardContent(new ManageTestCasesMenu());
+            }
+        });
+
+        addMenuButton("Settings", () -> switchDashboardContent(new SettingsMenu()));
+        addExitButton();
+    }
+
+    private void addTitleLabel() {
         JLabel title = new JLabel(ConstantValues.APP_NAME + " " + ConstantValues.APP_VERSION);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, Color.LIGHT_GRAY));
-
-        // List of buttons
-        OptiSideMenuButton mainMenuButton = new OptiSideMenuButton("Main Menu");
-        OptiSideMenuButton createNewTestCaseButton = new OptiSideMenuButton("Create New Test Case");
-        OptiSideMenuButton manageTestCasesButton = new OptiSideMenuButton("Manage Test Cases");
-        OptiSideMenuButton settingsButton = new OptiSideMenuButton("Settings");
-        OptiSideMenuButton exitButton = new OptiSideMenuButton("Exit");
-
-        // Add components to the panel
         add(title);
-        add(mainMenuButton);
-        add(createNewTestCaseButton);
-        add(manageTestCasesButton);
-        add(settingsButton);
+    }
+
+    private void addMenuButton(String buttonText, Runnable action) {
+        OptiSideMenuButton button = new OptiSideMenuButton(buttonText);
+        button.addActionListener(e -> action.run());
+        add(button);
+    }
+
+    private void addExitButton() {
+        OptiSideMenuButton exitButton = new OptiSideMenuButton("Exit");
+        exitButton.addActionListener(this::showExitConfirmation);
         add(exitButton);
+    }
 
-        // Add action listeners to the buttons
+    private void showConnectionErrorMessage() {
+        JOptionPane.showMessageDialog(null, "You are not connected to the database. Please configure your connection first.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
-        // Main Menu Button
-        mainMenuButton.addActionListener(e -> {
-            TestCaseAppManager.getDashboard().removeAll();
-            TestCaseAppManager.getDashboard().add(new MainMenu());
-            TestCaseAppManager.getDashboard().revalidate();
-            TestCaseAppManager.getDashboard().repaint();
-        });
+    private void switchDashboardContent(JPanel contentPanel) {
+        TestCaseAppManager.getDashboard().removeAll();
+        TestCaseAppManager.getDashboard().add(contentPanel);
+        TestCaseAppManager.getDashboard().revalidate();
+        TestCaseAppManager.getDashboard().repaint();
+    }
 
-        // Create New Test Case Button
-        createNewTestCaseButton.addActionListener(e -> {
-            TestCaseAppManager.getDashboard().removeAll();
-            TestCaseAppManager.getDashboard().add(new CreateNewTestCaseMenu());
-            TestCaseAppManager.getDashboard().revalidate();
-            TestCaseAppManager.getDashboard().repaint();
-        });
-
-        // Manage Test Cases Button
-        manageTestCasesButton.addActionListener(e -> {
-            TestCaseAppManager.getDashboard().removeAll();
-            TestCaseAppManager.getDashboard().add(new ManageTestCasesMenu());
-            TestCaseAppManager.getDashboard().revalidate();
-            TestCaseAppManager.getDashboard().repaint();
-        });
-
-        // Settings Button
-        settingsButton.addActionListener(e -> {
-            TestCaseAppManager.getDashboard().removeAll();
-            TestCaseAppManager.getDashboard().add(new SettingsMenu());
-            TestCaseAppManager.getDashboard().revalidate();
-            TestCaseAppManager.getDashboard().repaint();
-        });
-
-        exitButton.addActionListener(
-                exitConfirmationPopup -> new ExitConfirmationPopup()
-        );
+    private void showExitConfirmation(ActionEvent event) {
+        new ExitConfirmationPopup();
     }
 }
