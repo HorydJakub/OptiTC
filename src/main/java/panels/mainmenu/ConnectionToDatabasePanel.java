@@ -16,6 +16,9 @@ public class ConnectionToDatabasePanel extends JPanel {
 
         if (SqlBuilder.isConnected()) {
             connectionStatusLabel = new JLabel("You are connected to database. You can start using the application.");
+            // Set dark green color for the text if connected to database
+            connectionStatusLabel.setForeground(new java.awt.Color(0, 100, 0));
+
         } else {
             connectionStatusLabel = new JLabel("Not connected to database. Please click on button below to configure your connection.");
         }
@@ -51,6 +54,9 @@ public class ConnectionToDatabasePanel extends JPanel {
 
         if (SqlBuilder.isConnected()) {
             TestCasesStatisticsPanel testCasesStatisticsPanel = new TestCasesStatisticsPanel();
+
+            // Set max width and height for the panel
+            testCasesStatisticsPanel.setMaximumSize(new java.awt.Dimension(700, 500));
             add(testCasesStatisticsPanel);
         }
     }

@@ -1,53 +1,86 @@
 package panels.mainmenu;
 
 import core.SqlBuilder;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestCasesStatisticsPanel extends JPanel {
 
-    private final Map<String, Integer> statisticsMap = new HashMap<>();
-
     public TestCasesStatisticsPanel() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BorderLayout());
 
-        statisticsMap.put("Number of test cases", SqlBuilder.getNumberOfTestCases());
-        statisticsMap.put("Number of functional test cases", SqlBuilder.getNumberOfFunctionalTestCases());
-        statisticsMap.put("Number of GUI test cases", SqlBuilder.getNumberOfGuiTestCases());
-        statisticsMap.put("Number of performance test cases", SqlBuilder.getNumberOfPerformanceTestCases());
-        statisticsMap.put("Number of security test cases", SqlBuilder.getNumberOfSecurityTestCases());
-        statisticsMap.put("Number of usability test cases", SqlBuilder.getNumberOfUsabilityTestCases());
-        statisticsMap.put("Number of smoke test cases", SqlBuilder.getNumberOfSmokeTestCases());
+        DefaultCategoryDataset dataset = createDataset();
 
-        addStatisticLabels();
+        // Create a bar chart
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Test Cases Statistics",
+                "Test Cases",
+                "Number",
+                dataset);
+
+        // Set custom colors for each series (category)
+        List<Color> colors = Arrays.asList(
+                Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW, Color.ORANGE, Color.CYAN
+        );
+
+        CategoryPlot plot = (CategoryPlot) barChart.getPlot();
+        for (int i = 0; i < dataset.getRowCount(); i++) {
+            plot.getRenderer().setSeriesPaint(i, colors.get(i));
+        }
+
+        // Create a chart panel to hold the chart
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new Dimension(300, 200));
+
+        // Create a panel to contain the chart panel
+        JPanel statisticsPanel = new JPanel(new BorderLayout());
+        statisticsPanel.add(chartPanel, BorderLayout.CENTER);
+
+        // Set chart panel alignment to center
+        statisticsPanel.setAlignmentX(CENTER_ALIGNMENT);
+
+        // Set maximum dimensions for the panel holding the chart
+        statisticsPanel.setMaximumSize(new Dimension(350, 250));
+
+        // Set smaller font size
+        Font font = statisticsPanel.getFont().deriveFont(12.0f);
+        statisticsPanel.setFont(font);
+
+        // Create JLabel with total number of test cases
+        JLabel totalNumberOfTestCasesLabel = new JLabel("Total number of test cases: " + SqlBuilder.getNumberOfTestCases());
+
+        // Set alignment to center
+        totalNumberOfTestCasesLabel.setAlignmentX(CENTER_ALIGNMENT);
+
+        // Add top margin
+        totalNumberOfTestCasesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+
+        // Add the label to the panel
+        statisticsPanel.add(totalNumberOfTestCasesLabel, BorderLayout.NORTH);
+
+        // Add the panel containing the chart to the main panel
+        add(statisticsPanel, BorderLayout.CENTER);
     }
 
-    private void addStatisticLabels() {
-        JLabel statisticLabel = new JLabel("This is the list of statistics:");
-        formatLabel(statisticLabel, true);
+    private DefaultCategoryDataset createDataset() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        add(statisticLabel);
+        // Add data to the dataset
+        dataset.addValue(SqlBuilder.getNumberOfFunctionalTestCases(), "Functional", "Functional");
+        dataset.addValue(SqlBuilder.getNumberOfGuiTestCases(), "GUI", "GUI");
+        dataset.addValue(SqlBuilder.getNumberOfPerformanceTestCases(), "Performance", "Performance");
+        dataset.addValue(SqlBuilder.getNumberOfSecurityTestCases(), "Security", "Security");
+        dataset.addValue(SqlBuilder.getNumberOfUsabilityTestCases(), "Usability", "Usability");
+        dataset.addValue(SqlBuilder.getNumberOfSmokeTestCases(), "Smoke", "Smoke");
 
-        for (String statistic : statisticsMap.keySet()) {
-            JLabel label = new JLabel(statistic + ": " + statisticsMap.get(statistic));
-            formatLabel(label, false);
-            add(label);
-        }
-    }
-
-    private void formatLabel(JLabel label, boolean isHeader) {
-        label.setAlignmentX(CENTER_ALIGNMENT);
-        label.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-
-        if (isHeader) {
-            label.setFont(label.getFont().deriveFont(Font.BOLD | Font.ITALIC, 16.0f));
-            label.setForeground(Color.GRAY);
-        } else {
-            label.setFont(label.getFont().deriveFont(Font.ITALIC));
-            label.setForeground(Color.GRAY);
-        }
+        return dataset;
     }
 }
