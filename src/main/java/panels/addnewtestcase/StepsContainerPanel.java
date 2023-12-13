@@ -14,7 +14,7 @@ public class StepsContainerPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Add the first step only if the fields are editable
-        AddStepPanel addStepPanel = new AddStepPanel(1, this, areFieldsEditable);
+        AddStepPanel addStepPanel = new AddStepPanel(1, this, areFieldsEditable, false);
 
         // Add the first step to the panel only if the fields are editable
         if (areFieldsEditable && !editMode) {

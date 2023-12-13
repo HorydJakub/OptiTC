@@ -46,7 +46,7 @@ public class EditTestCaseMenu extends JPanel {
 
         // Create AddStepPanel for each step
         for (int i = 0; i < sizeOfSteps; i++) {
-            AddStepPanel addStepPanel = new AddStepPanel(i + 1, stepsContainerPanel, true);
+            AddStepPanel addStepPanel = new AddStepPanel(i + 1, stepsContainerPanel, true, false);
             addStepPanel.getStepTextField().setText(testCase.getTestCaseStepsValuesAsList().get(i));
             stepsContainerPanel.add(addStepPanel);
         }

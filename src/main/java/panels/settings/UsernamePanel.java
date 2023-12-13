@@ -14,7 +14,7 @@ public class UsernamePanel extends JPanel {
         JLabel label = new JLabel("Username: ");
 
         // Add text field
-        textField = new OptiTextField("Please fill out this field!", 500, 30, true);
+        textField = new OptiTextField(true, false);
 
         // Add components to the panel
         add(label);

@@ -11,7 +11,7 @@ public class TestCaseDescriptionPanel extends JPanel {
     private static OptiTextField testCaseDescriptionTextField;
     public TestCaseDescriptionPanel(String testCaseDescriptionLabelText, String testCaseDescriptionTextFieldText, boolean isEditable) {
         this.testCaseDescriptionLabel = new JLabel(testCaseDescriptionLabelText);
-        testCaseDescriptionTextField = new OptiTextField(testCaseDescriptionTextFieldText, 500, 30, isEditable);
+        testCaseDescriptionTextField = new OptiTextField(isEditable, false);
         add(testCaseDescriptionLabel);
         add(testCaseDescriptionTextField);
     }
