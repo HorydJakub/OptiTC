@@ -10,14 +10,14 @@ public class AddStepPanel extends JPanel {
     private OptiTextField stepTextField;
     private int stepNumber;
 
-    public AddStepPanel(int stepNumber, StepsContainerPanel stepsContainerPanel, boolean areFieldsEditable) {
+    public AddStepPanel(int stepNumber, StepsContainerPanel stepsContainerPanel, boolean areFieldsEditable, boolean canBeEmpty) {
         this.stepNumber = stepNumber;
 
         // Create Step Label
         JLabel stepLabel = new JLabel("Step: " + stepNumber);
 
         // Create Step TextField
-        stepTextField = new OptiTextField("Please fill out this field!", 500, 30, areFieldsEditable);
+        stepTextField = new OptiTextField(areFieldsEditable, canBeEmpty);
 
         // Remove single step button only when stepNumber is greater than 1
         if (stepNumber > 1 && areFieldsEditable) {
