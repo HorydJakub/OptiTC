@@ -42,3 +42,4 @@ build/
 qodana.yaml
 default.properties
 /src/main/resources/META-INF/MANIFEST.MF
+/src/main/resources/META-INF/
