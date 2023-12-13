@@ -1,10 +1,12 @@
 package panels.settings;
 
 import core.PropertiesHandler;
+import core.SqlBuilder;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DatabaseSettingsButtonsPanel extends JPanel {
 
@@ -17,26 +19,39 @@ public class DatabaseSettingsButtonsPanel extends JPanel {
 
         // Add action listeners
         saveButton.addActionListener(e -> {
-            if (getListOfEmptyFields().isEmpty()) {
-                // Update the properties file
-                // ToDO: Add password field
-                JOptionPane.showMessageDialog(null, "The settings have been saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Please fill out the following fields: " + getListOfEmptyFields(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+            List<String> emptyFields = getListOfEmptyFields();
+            if (emptyFields.isEmpty()) {
+                PropertiesHandler.updateProperties(
+                        UrlPanel.getOptiTextField().getText(),
+                        UsernamePanel.getOptiTextField().getText(),
+                        PasswordPanel.getOptiTextField().getText());
+                JOptionPane.showMessageDialog(null, "Database settings saved!");
 
+                String connectionMessage = SqlBuilder.isConnected() ? "Connected to database!" : "Could not connect to database! Try again.";
+                JOptionPane.showMessageDialog(null, connectionMessage);
+            } else {
+                JOptionPane.showMessageDialog(null, "Please fill out the following fields: " + String.join(", ", emptyFields));
+            }
+
+        });
     }
 
     private List<String> getListOfEmptyFields() {
-        List<String> emptyFields = new ArrayList<>();
-        if (UrlPanel.getOptiTextField().getText().equals("Please fill out this field!")) {
-            emptyFields.add("URL");
-        }
-        if (UsernamePanel.getOptiTextField().getText().equals("Please fill out this field!")) {
-            emptyFields.add("Username");
-        }
-        return emptyFields;
+        return Stream.of(
+                        UrlPanel.getOptiTextField(),
+                        UsernamePanel.getOptiTextField(),
+                        PasswordPanel.getOptiTextField())
+                .filter(textField -> textField.getText().equals("Please fill out this field!"))
+                .map(this::getFieldName)
+                .collect(Collectors.toList());
     }
 
+    private String getFieldName(JTextField textField) {
+        if (textField == UrlPanel.getOptiTextField()) {
+            return "URL";
+        } else if (textField == UsernamePanel.getOptiTextField()) {
+            return "Username";
+        }
+        return "Password";
+    }
 }

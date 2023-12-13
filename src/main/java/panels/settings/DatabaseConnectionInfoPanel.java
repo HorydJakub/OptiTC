@@ -10,7 +10,7 @@ public class DatabaseConnectionInfoPanel extends JPanel {
     public DatabaseConnectionInfoPanel() {
 
         // Add label
-        JLabel label = new JLabel("Currently supported databases: " + SupportedDatabases.MYSQL.getName());
+        JLabel label = new JLabel("Currently supported databases: " + SupportedDatabases.MYSQL.getName() + ". Do not forget to create 'optitc' database before save!");
 
         // Set font size
         label.setFont(label.getFont().deriveFont(15.0f));

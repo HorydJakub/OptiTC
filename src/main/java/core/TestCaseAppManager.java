@@ -39,20 +39,9 @@ public class TestCaseAppManager extends JFrame {
 
         // Show main menu by default
         dashboard.add(mainMenu);
-
-        // Check if file default.properties exists if not create it
-        PropertiesHandler.createDefaultPropertiesFile();
     }
 
     public static Dashboard getDashboard() {
         return dashboard;
-    }
-
-    public static SideMenu getLeftMenu() {
-        return leftMenu;
-    }
-
-    public static FooterMenu getFooterMenu() {
-        return footerMenu;
     }
 }
