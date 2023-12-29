@@ -12,6 +12,7 @@ public class TestCaseExpectedResultsPanel extends JPanel {
     public TestCaseExpectedResultsPanel(String testCaseExpectedResultsLabelText, String testCaseExpectedResultsTextFieldText, boolean isEditable) {
         this.testCaseExpectedResultsLabel = new JLabel(testCaseExpectedResultsLabelText);
         testCaseExpectedResultsTextField = new OptiTextField(isEditable, false);
+        setTestCaseExpectedResultsTextField(testCaseExpectedResultsTextFieldText);
         add(testCaseExpectedResultsLabel);
         add(testCaseExpectedResultsTextField);
     }
