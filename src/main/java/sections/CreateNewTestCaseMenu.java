@@ -15,6 +15,9 @@ public class CreateNewTestCaseMenu extends JPanel {
     private static StepsContainerPanel stepsContainerPanel = new StepsContainerPanel(true, false);
     public CreateNewTestCaseMenu() {
 
+        // Reset steps count
+        AddNewStepButton.resetStepsCount();
+
         // Set layout for the panel
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

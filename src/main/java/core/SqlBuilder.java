@@ -1,5 +1,6 @@
 package core;
 
+import components.OptiTextField;
 import components.TestCase;
 
 import java.awt.*;
@@ -484,5 +485,89 @@ public abstract class SqlBuilder {
             System.out.println(e);
         }
         return numberOfSmokeTestCases;
+    }
+
+    public static void updateTestCaseTitle(int testCaseId, String testCaseTitleTextField) {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_cases SET testcase_name = ? WHERE testcase_id = ?");
+            preparedStatement.setString(1, testCaseTitleTextField);
+            preparedStatement.setInt(2, testCaseId);
+            preparedStatement.executeUpdate();
+            closeResources(preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void updateTestCaseDescription(int testCaseId, String testCaseDescriptionTextField) {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_cases SET testcase_description = ? WHERE testcase_id = ?");
+            preparedStatement.setString(1, testCaseDescriptionTextField);
+            preparedStatement.setInt(2, testCaseId);
+            preparedStatement.executeUpdate();
+            closeResources(preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void updateTestCaseSteps(int testCaseId, List<String> stepsTextFieldFromStepsContainerPanel) {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_cases SET step = ? WHERE testcase_id = ?");
+            preparedStatement.setString(1, concatenateSteps(stepsTextFieldFromStepsContainerPanel));
+            preparedStatement.setInt(2, testCaseId);
+            preparedStatement.executeUpdate();
+            closeResources(preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void updateTestCasePriority(int testCaseId, String priorityComboBox) {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_cases SET testcase_priority = ? WHERE testcase_id = ?");
+            preparedStatement.setString(1, priorityComboBox);
+            preparedStatement.setInt(2, testCaseId);
+            preparedStatement.executeUpdate();
+            closeResources(preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void updateTestCaseType(int testCaseId, String typeComboBox) {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_cases SET testcase_type = ? WHERE testcase_id = ?");
+            preparedStatement.setString(1, typeComboBox);
+            preparedStatement.setInt(2, testCaseId);
+            preparedStatement.executeUpdate();
+            closeResources(preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void updateTestCaseExpectedResult(int testCaseId, String testCaseExpectedResultsTextField) {
+        try {
+            PropertiesHandler propertiesHandler = new PropertiesHandler();
+            Connection connection = getConnection(propertiesHandler);
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_cases SET testcase_expected_results = ? WHERE testcase_id = ?");
+            preparedStatement.setString(1, testCaseExpectedResultsTextField);
+            preparedStatement.setInt(2, testCaseId);
+            preparedStatement.executeUpdate();
+            closeResources(preparedStatement, connection);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        }
     }
 }
