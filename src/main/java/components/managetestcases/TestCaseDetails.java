@@ -15,10 +15,6 @@ public class TestCaseDetails extends JPanel {
         this.testCaseId = testCaseId;
         this.testCase = new TestCase(testCaseId);
 
-        System.out.println(testCase.getTestCaseDescription());
-        System.out.println(testCase.getTestCaseTitle());
-        System.out.println(testCase.getTestCaseExpectedResult());
-
         // Set layout for the panel
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
