@@ -28,11 +28,6 @@ OptiTC is an intuitive and efficient application designed for test case manageme
 ![App Screenshot](https://i.imgur.com/FMHzmww.png)
 
 
-## Authors
-
-- [@HorydJakub](https://github.com/HorydJakub)
-
-
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
